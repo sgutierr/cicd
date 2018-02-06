@@ -31,8 +31,7 @@ RUN eval "$(rbenv init -)"; rbenv install 2.4.3 \
 && eval "$(rbenv init -)"; gem install bundler -f
 
 # Install 3Scale toolbox
-RUN 3scale_toolbox/gem build 3scale_toolbox.gemspec \
-&& gem build 3scale_toolbox.gemspec 
+RUN gem install 3scale_toolbox
 
 ENV NODE_TLS_REJECT_UNAUTHORIZED=0 
 
