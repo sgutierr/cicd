@@ -12,12 +12,11 @@
 3scale-cli limits create  --service 6 --appplan 13 --metric 16 --period eternity --unit 0
 3scale-cli app-plan create --service 6 --plan unlimited
 
-
 3scale-cli limits create  --service 6 --appplan 14 --metric 13 --period day --unit 0
 3scale-cli limits create  --service 6 --appplan 14 --metric 14 --period week --unit 0
 3scale-cli limits create  --service 6 --appplan 14 --metric 15 --period eternity --unit 0
 3scale-cli limits create  --service 6 --appplan 14 --metric 16 --period eternity --unit 0
-3scale-cli accounts list
+3scale-cli accounts list | awk '{ print $1;}' | while read line && [ -z "$id" ]; do [[ ! "$line" =~ ^[0-9]+$ ]] || id=$line echo $line; done | head -n 1 )
 3scale-cli applications create --account 3 --plan 13 --name test --description test
 3scale-cli activedocs create --systemName PaymentsAPI  -f /home/sgutierr/development/3Scale/pocs/Hetzner/3scale_demo/swaggers/payment_swagger.json
 
