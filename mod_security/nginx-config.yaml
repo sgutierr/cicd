@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: camelot
+  selfLink: /api/v1/namespaces/camelot/configmaps/nginx-config
+  uid: aae8571c-aa82-11e7-add3-fa163efa9f1c
+  resourceVersion: '3955205'
+  creationTimestamp: '2017-10-06T10:39:44Z'
+data:
+  default.conf: |
+    server {
+        listen       80;
+        server_name  proxy.openshift.it;
+
+
+        #charset koi8-r;
+        #access_log  /var/log/nginx/log/host.access.log  main;
+
+        location / {
+            ModSecurityEnabled on;
+            ModSecurityConfig modsecurity.conf;
+            proxy_pass      https://camelot.openshift.it;
+        }
+
+        #error_page  404              /404.html;
+
+        # redirect server error pages to the static page /50x.html
+        #
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   /usr/share/nginx/html;
+        }
+
+        # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+        #
+        #location ~ \.php$ {
+        #    proxy_pass   http://127.0.0.1;
+        #}
+
+        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+        #
+        #location ~ \.php$ {
+        #    root           html;
+        #    fastcgi_pass   127.0.0.1:9000;
+        #    fastcgi_index  index.php;
+        #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+        #    include        fastcgi_params;
+        #}
+
+        # deny access to .htaccess files, if Apache's document root
+        # concurs with nginx's one
+        #
+        #location ~ /\.ht {
+        #    deny  all;
+        #}
+    }
