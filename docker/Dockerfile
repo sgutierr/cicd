@@ -9,6 +9,7 @@ RUN git clone git://github.com/rbenv/rbenv.git /usr/local/rbenv \
 &&  git clone git://github.com/jf/rbenv-gemset.git /usr/local/rbenv/plugins/rbenv-gemset \
 &&  git clone git://github.com/3scale/3scale_toolbox.git \
 &&  git clone git://github.com/3scale/3scale-cli \
+&&  git clone git://github.com/sgutierr/cicd.git \
 &&  /usr/local/rbenv/plugins/ruby-build/install.sh
 ENV PATH /usr/local/rbenv/bin:$PATH
 ENV RBENV_ROOT /usr/local/rbenv
@@ -47,5 +48,7 @@ RUN echo '{
   }
 }' >> $HOME.3scale/credentials.json
 
+# Setup execution permisssions on scripts
+RUN chmod 711 /cicd/swaggers/*
 
 
