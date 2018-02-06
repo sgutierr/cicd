@@ -1,0 +1,41 @@
+
+3scale-cli services create --service payment --serviceName PaymentsAPI
+3scale-cli import swagger -f /home/sgutierr/development/3Scale/pocs/Hetzner/3scale_demo/swaggers/payment_swagger.json -p "{method}{path}" -m true -s 6
+
+// Application plan Basic
+3scale-cli app-plan create --service 6 --plan Basic
+3scale-cli metrics list -s 6
+
+3scale-cli limits create  --service 6 --appplan 13 --metric 13 --period day --unit 0
+3scale-cli limits create  --service 6 --appplan 13 --metric 14 --period week --unit 0
+3scale-cli limits create  --service 6 --appplan 13 --metric 15 --period eternity --unit 0
+3scale-cli limits create  --service 6 --appplan 13 --metric 16 --period eternity --unit 0
+3scale-cli app-plan create --service 6 --plan unlimited
+
+
+3scale-cli limits create  --service 6 --appplan 14 --metric 13 --period day --unit 0
+3scale-cli limits create  --service 6 --appplan 14 --metric 14 --period week --unit 0
+3scale-cli limits create  --service 6 --appplan 14 --metric 15 --period eternity --unit 0
+3scale-cli limits create  --service 6 --appplan 14 --metric 16 --period eternity --unit 0
+3scale-cli accounts list
+3scale-cli applications create --account 3 --plan 13 --name test --description test
+3scale-cli activedocs create --systemName PaymentsAPI  -f /home/sgutierr/development/3Scale/pocs/Hetzner/3scale_demo/swaggers/payment_swagger.json
+
+
+access key: XXXXXXXXXXXXX
+service_id:6
+
+curl -v  -k -X POST "https://3scale-admin.5.9.12.13.xip.io/admin/api/services/6/features.xml" -d 'access_token=XXXXXXXXXXXXX&name=Limited+Access&system_name=limitedaccess&scope=ServicePlan'
+curl -v  -k -X POST "https://3scale-admin.5.9.12.13.xip.io/admin/api/services/6/features.xml" -d 'access_token=XXXXXXXXXXXXX&name=Gree&system_name=Free'
+curl -v  -k -X POST "https://3scale-admin.5.9.12.13.xip.io/admin/api/services/6/features.xml" -d 'access_token=XXXXXXXXXXXXX&name=Unlimited+calls&system_name=UnLimitedAccess'
+curl -v  -k -X POST "https://3scale-admin.5.9.12.13.xip.io/admin/api/services/6/features.xml" -d 'access_token=XXXXXXXXXXXXX&name=Pay+per+use&system_name=PayPerUse'
+
+
+3scale toolbox
+3scale copy service NUMBER --source=https://provider_key@foo-admin.3scale.net --destination=https://provider_key@foo2-admin.3scale.net
+
+
+3scale copy service 3 --source=https://7662d9afff8942eefe6f3aa769bddf8b@3scale-admin.openshift.it --destination=https://5452ef97fac02157e60bfa79733db361@3scale-admin.5.9.12.13.xip.io
+
+
+https://3scale-admin.openshift.it/admin/api/cms/files
