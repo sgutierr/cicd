@@ -1,5 +1,7 @@
 #!/bin/sh
 
+SERVICE_ID=$(3scale-cli services list | grep $SERVICE_NAME | awk '{ print $1 }')
+
 3scale-cli import swagger -f /cicd/swaggers/payment_swagger.json -p "{method}{path}" -m true -s $SERVICE_ID
 3scale-cli activedocs create --systemName PaymentsAPI  -f /cicd/swaggers/payment_swagger.json
 
