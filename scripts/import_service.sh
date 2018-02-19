@@ -2,16 +2,16 @@
 
 SERVICE_ID=$(3scale-cli services list | grep $SERVICE_NAME | awk '{ print $1 }')
 
-3scale-cli import swagger -f /cicd/swaggers/payment_swagger.json -p "{method}{path}" -m true -s $SERVICE_ID
-3scale-cli activedocs create --systemName PaymentsAPI  -f /cicd/swaggers/payment_swagger.json
+3scale-cli import swagger -f /cicd/swaggers/payment_swagger.json -p "{method}{path}" -m true --service $SERVICE_ID
+3scale-cli activedocs create --systemName PaymentsAPI  -f /cicd/swaggers/payment_swagger.json --service $SERVICE_ID
 
 # Create two application plans (basic and unlimited)
 aplication_plan_basic_id=$(3scale-cli app-plan create --service $SERVICE_ID --plan Basic | awk '{ print $10; }')
 aplication_plan_unlimited_id=$(3scale-cli app-plan create --service $SERVICE_ID --plan Unlimited | awk '{ print $10; }')
 
 # Create metrics for v1 and v2 endpoints
-3scale-cli metrics -s $SERVICE_ID -m version1 create
-3scale-cli metrics -s $SERVICE_ID -m version2 create
+3scale-cli metrics -s $SERVICE_ID -m "version1" create
+3scale-cli metrics -s $SERVICE_ID -m "version2 "create
 
 # Get metric id
 metric_id=$(3scale-cli metrics list -s $SERVICE_ID | awk '{ print $1;}' | while read line && [ -z "$id" ]; do [[ ! "$line" =~ ^[0-9]+$ ]] || id=$line echo $line; done | head -n 1 )

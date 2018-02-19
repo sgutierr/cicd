@@ -39,14 +39,13 @@ ENV NODE_TLS_REJECT_UNAUTHORIZED=0
 RUN npm install -g node-3scale-cli
 # Create credentials.json
 RUN cd $HOME; mkdir .3scale
-RUN echo '{ "threescale": {  "id": "3scale", "access_token": "7760306a87c44ce958c070beb1eded8eef2d5d15d631b1f2e7568e07b9238f", "wildcard": "5.9.12.13.xip.io"  }}' >> $HOME/.3scale/credentials.json
 
 # Install CMS tool
 RUN cd /cicd/cms; gem install 3scale-cms-0.1.1.gem
 
 ENV SERVICE_NAME=test
 ENV APIM=https://3scale-admin.5.9.12.13.xip.io
-ENV ACCESS_TOKEN=7760306a87c44ce958c070beb1eded8eef2d5d15d631b1f2e7568e07b9238f
+
 
 
 # Setup execution permisssions on scripts

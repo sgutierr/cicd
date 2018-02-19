@@ -1,0 +1,88 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: 3scale-ci-cd
+  name: 3scale-ci-cd 
+  namespace: devops
+  resourceVersion: '31541990'  
+spec:
+  replicas: 1
+  selector:
+    app: 3scale-ci-cd
+    deploymentconfig: 3scale-ci-cd
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 3000
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftWebConsole
+      creationTimestamp: null
+      labels:
+        app: 3scale-ci-cd
+        deploymentconfig: 3scale-ci-cd
+    spec:
+      containers:
+        - env:
+            - name: SERVICE_NAME
+              value: testCICD
+            - name: ACCESS_TOKEN
+              value: fc1ad5625d779ae5bdddeef536dab905afccb3943ee73ae988bb0adf930b41bb
+            - name: WILDCARD_DOMAIN
+              value: openshift.it
+            - name: ID
+              value: 3scale
+          image: >-
+            docker-registry.default.svc:5000/openshift/3scale-ci-cd:1.0
+          name: 3scale-ci-cd
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  test: false
+  triggers:
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - 3scale-ci-cd
+        from:
+          kind: ImageStreamTag
+          name: '3scale-ci-cd:1.0'
+          namespace: openshift
+      type: ImageChange
+    - type: ConfigChange
+status:
+  availableReplicas: 0
+  conditions:
+    - lastTransitionTime: '2018-02-19T14:34:06Z'
+      lastUpdateTime: '2018-02-19T14:34:06Z'
+      message: Deployment config does not have minimum availability.
+      status: 'False'
+      type: Available
+    - lastTransitionTime: '2018-02-19T16:32:41Z'
+      lastUpdateTime: '2018-02-19T16:32:41Z'
+      message: replication controller "3scale-ci-cd-4" has failed progressing
+      reason: ProgressDeadlineExceeded
+      status: 'False'
+      type: Progressing
+  details:
+    causes:
+      - type: ConfigChange
+    message: config change
+  latestVersion: 4
+  observedGeneration: 6
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0
