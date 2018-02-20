@@ -43,11 +43,6 @@ RUN cd $HOME; mkdir .3scale
 # Install CMS tool
 RUN cd /cicd/cms; gem install 3scale-cms-0.1.1.gem
 
-ENV SERVICE_NAME=test
-ENV APIM=https://3scale-admin.5.9.12.13.xip.io
-
-
-
 # Setup execution permisssions on scripts
 RUN chmod 711 /cicd/scripts/*
 
