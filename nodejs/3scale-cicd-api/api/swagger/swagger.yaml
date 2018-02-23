@@ -1,0 +1,260 @@
+swagger: '2.0'
+info:
+  version: 2.0.0
+  title: 3Scale CICD API
+  description: 3Scale CICD API
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    name: 3Scalers
+    email: sgutierr@redhat.com
+    url: 'http://sms.3scale.net'
+  license:
+    name: MIT
+    url: 'https://github.com/sgutierr/cicd.git'
+host: localhost:10010
+basePath: /
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  '/one-environment/config-connection':
+    # binds a127 app logic to a route
+    x-swagger-router-controller: hello_world  
+    post:
+      description: Config 3scale Connection
+      operationId: configconnection
+      parameters:
+       - name: body
+         in: body
+         description: id_subdomain
+         required: true
+         schema:
+           $ref:  '#/definitions/Credentials'
+      responses:
+        '200':
+          description: 3Scale connection configured 
+        '403':
+          description: Configuration failed
+          schema:
+            $ref: '#/definitions/AuthenticationFailed'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/one-environment/new-service':
+      # binds a127 app logic to a route
+    x-swagger-router-controller: hello_world
+    post:
+      description: New 3scale Service
+      operationId: New 3scale Service
+      parameters:
+        - name: service_name
+          in: header
+          description: Service name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 3scale service created
+          schema:
+            $ref: '#/definitions/ServiceStatus'
+        '403':
+          description: Authentication failed
+          schema:
+            $ref: '#/definitions/AuthenticationFailed'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/one-environment/import-demo-service':
+      # binds a127 app logic to a route
+    x-swagger-router-controller: hello_world
+    post:
+      description: Import demo service
+      operationId: Import demo service
+      parameters:
+        - name: service_name
+          in: header
+          description: Service name
+          required: true
+          type: string
+        - name: access_token
+          in: header
+          description: Access token
+          required: true
+          type: string          
+        - name: apim
+          in: header
+          description: APIM
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Service imported
+          schema:
+            $ref: '#/definitions/ServiceStatus'
+        '403':
+          description: Authentication failed
+          schema:
+            $ref: '#/definitions/AuthenticationFailed'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/one-environment/test-service':
+      # binds a127 app logic to a route
+    x-swagger-router-controller: hello_world
+    post:
+      description: Updates an Payment
+      operationId: Updates an Payment
+      parameters:
+        - name: id_service
+          in: header
+          description: Service ID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Test service in staging API gateway
+          schema:
+            $ref: '#/definitions/ServiceStatus'
+        '403':
+          description: Authentication failed
+          schema:
+            $ref: '#/definitions/AuthenticationFailed'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/one-environment/delete-service':
+      # binds a127 app logic to a route
+    x-swagger-router-controller: hello_world
+    delete:
+      description: Delete a Payment
+      operationId: Delete a Payment
+      parameters:
+        - name: service_id
+          in: header
+          description: service_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Service deleted
+          schema:
+            $ref: '#/definitions/ServiceStatus'
+        '403':
+          description: Authentication failed
+          schema:
+            $ref: '#/definitions/AuthenticationFailed'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/two-environments/copy-service':
+      # binds a127 app logic to a route
+    x-swagger-router-controller: hello_world
+    post:
+      description: Copy service between environments
+      operationId: Copy service between environments
+      parameters:
+        - name: service_id_src
+          in: header
+          description: service_id_src
+          required: true
+          type: string
+        - name: service_id_dest
+          in: header
+          description: service_id_dest
+          required: true
+          type: string
+        - name: source
+          in: header
+          description: source
+          required: true
+          type: string
+        - name: destination
+          in: header
+          description: destination
+          required: true
+          type: string
+      responses:
+        '200':
+          description: SMS Details response
+          schema:
+            $ref: '#/definitions/ServiceStatus'
+        '403':
+          description: Authentication failed
+          schema:
+            $ref: '#/definitions/AuthenticationFailed'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/two-environments/update-service':
+      # binds a127 app logic to a route
+    x-swagger-router-controller: hello_world
+    post:
+      description: Update service between environments
+      operationId: Update service between environments
+      parameters:
+        - name: service_id_src
+          in: header
+          description: service_id_src
+          required: true
+          type: string
+        - name: service_id_dest
+          in: header
+          description: service_id_dest
+          required: true
+          type: string
+        - name: source
+          in: header
+          description: source
+          required: true
+          type: string
+        - name: destination
+          in: header
+          description: destination
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Service updated
+          schema:
+            $ref: '#/definitions/ServiceStatus'
+        '403':
+          description: Authentication failed
+          schema:
+            $ref: '#/definitions/AuthenticationFailed'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Credentials:
+    type: object
+    required:
+      - subdomain
+      - access_token
+      - wildcard_domain
+    properties:
+      subdomain:
+        type: string
+      access_token:
+        type: string
+      wildcard_domain:
+        type: string        
+  ServiceStatus:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  AuthenticationFailed:
+    type: object
+  Error:
+    type: object

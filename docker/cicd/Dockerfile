@@ -115,4 +115,9 @@ RUN cd /cicd/cms; gem install 3scale-cms-0.1.1.gem
 # Setup execution permisssions on scripts
 RUN chmod 711 /cicd/scripts/*
 
+# Patch for 3Scale-api 
+RUN cp -f /cicd/3scale-api-ruby/*.rb /usr/local/rbenv/versions/2.4.3/lib/ruby/gems/2.4.0/gems/3scale-api-0.1.5/lib/3scale/api
+
+# swagger installation
+RUN npm install -g swagger; cd /cicd/nodejs/3scale-cicd-api; swagger project start
 

@@ -4,3 +4,4 @@
 cd docker
 docker build --rm -t centos-ruby .
 
+
