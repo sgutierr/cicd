@@ -22,7 +22,7 @@ produces:
 paths:
   '/one-environment/config-connection':
     # binds a127 app logic to a route
-    x-swagger-router-controller: hello_world  
+    x-swagger-router-controller: cicd_controller  
     post:
       description: Config 3scale Connection
       operationId: configconnection
@@ -46,16 +46,17 @@ paths:
             $ref: '#/definitions/Error'
   '/one-environment/new-service':
       # binds a127 app logic to a route
-    x-swagger-router-controller: hello_world
+    x-swagger-router-controller: cicd_controller
     post:
       description: New 3scale Service
-      operationId: New 3scale Service
+      operationId: createservice
       parameters:
-        - name: service_name
-          in: header
+        - name: body
+          in: body
           description: Service name
           required: true
-          type: string
+          schema:
+           $ref:  '#/definitions/ServiceName'
       responses:
         '200':
           description: 3scale service created
@@ -71,26 +72,17 @@ paths:
             $ref: '#/definitions/Error'
   '/one-environment/import-demo-service':
       # binds a127 app logic to a route
-    x-swagger-router-controller: hello_world
+    x-swagger-router-controller: cicd_controller
     post:
       description: Import demo service
-      operationId: Import demo service
+      operationId: importservicedemo
       parameters:
-        - name: service_name
-          in: header
-          description: Service name
+        - name: body
+          in: body
+          description: Importing a service
           required: true
-          type: string
-        - name: access_token
-          in: header
-          description: Access token
-          required: true
-          type: string          
-        - name: apim
-          in: header
-          description: APIM
-          required: true
-          type: string
+          schema:
+           $ref:  '#/definitions/ImportService'          
       responses:
         '200':
           description: Service imported
@@ -106,16 +98,17 @@ paths:
             $ref: '#/definitions/Error'
   '/one-environment/test-service':
       # binds a127 app logic to a route
-    x-swagger-router-controller: hello_world
+    x-swagger-router-controller: cicd_controller
     post:
-      description: Updates an Payment
-      operationId: Updates an Payment
+      description: Testing a service 
+      operationId: testingservice
       parameters:
-        - name: id_service
-          in: header
-          description: Service ID
+        - name: body
+          in: body
+          description: Service Name
           required: true
-          type: string
+          schema:
+           $ref:  '#/definitions/ServiceName'          
       responses:
         '200':
           description: Test service in staging API gateway
@@ -131,7 +124,7 @@ paths:
             $ref: '#/definitions/Error'
   '/one-environment/delete-service':
       # binds a127 app logic to a route
-    x-swagger-router-controller: hello_world
+    x-swagger-router-controller: cicd_controller
     delete:
       description: Delete a Payment
       operationId: Delete a Payment
@@ -156,7 +149,7 @@ paths:
             $ref: '#/definitions/Error'
   '/two-environments/copy-service':
       # binds a127 app logic to a route
-    x-swagger-router-controller: hello_world
+    x-swagger-router-controller: cicd_controller
     post:
       description: Copy service between environments
       operationId: Copy service between environments
@@ -235,6 +228,26 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 definitions:
+  ImportService:
+    type: object
+    required:
+      - name
+      - access_token
+      - apim
+    properties:
+      name:
+        type: string
+      access_token:
+        type: string
+      apim:
+        type: string        
+  ServiceName:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        type: string
   Credentials:
     type: object
     required:

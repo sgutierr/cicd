@@ -99,10 +99,11 @@ RUN eval "$(rbenv init -)"; rbenv install 2.4.3 \
 &&  eval "$(rbenv init -)"; gem update --system \
 && eval "$(rbenv init -)"; gem install bundler -f
 
+
 # Install 3Scale toolbox
 RUN gem install 3scale_toolbox
 
-ENV NODE_TLS_REJECT_UNAUTHORIZED=0 
+ENV NODE_TLS_REJECT_UNAUTHORIZED=0  
 
 # Install 3Scale-cli
 RUN npm install -g node-3scale-cli
@@ -118,6 +119,13 @@ RUN chmod 711 /cicd/scripts/*
 # Patch for 3Scale-api 
 RUN cp -f /cicd/3scale-api-ruby/*.rb /usr/local/rbenv/versions/2.4.3/lib/ruby/gems/2.4.0/gems/3scale-api-0.1.5/lib/3scale/api
 
-# swagger installation
-RUN npm install -g swagger; cd /cicd/nodejs/3scale-cicd-api; swagger project start
+# Workaround for https://github.com/npm/npm/issues/9863
+RUN npm root install -g swagger
+# Swagger installation
+RUN npm install -g swagger
+
+# CICD REST API installation
+ENV HOME=/root
+RUN cd /cicd/nodejs/3scale-cicd-api; swagger project start
+RUN npm install -g swagger ;  cd /cicd/nodejs/3scale-cicd-api; swagger project start
 
