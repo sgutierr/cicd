@@ -10,7 +10,7 @@ use "child process" module of nodejs to execute any shell commands or scripts wi
 
 const exec = require('child_process').exec;
   
-const base_path = '/home/sgutierr/development/3Scale/Features/CLI_container';
+const base_path = '';
 /*
  Modules make it possible to import JavaScript files into your application.  Modules are imported
  using 'require' statements that give you a reference to the module.
