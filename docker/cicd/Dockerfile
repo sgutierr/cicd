@@ -105,8 +105,9 @@ RUN gem install 3scale_toolbox
 
 ENV NODE_TLS_REJECT_UNAUTHORIZED=0  
 
-# Install 3Scale-cli
+# Workaround for https://github.com/npm/npm/issues/9863
 RUN npm install -g node-3scale-cli
+
 # Create credentials.json
 RUN cd $HOME; mkdir .3scale
 
@@ -122,10 +123,13 @@ RUN cp -f /cicd/3scale-api-ruby/*.rb /usr/local/rbenv/versions/2.4.3/lib/ruby/ge
 # Workaround for https://github.com/npm/npm/issues/9863
 RUN npm root install -g swagger
 # Swagger installation
-RUN npm install -g swagger
+ENV HOME=/root
+RUN npm install -g swagger --suppess-warnings
+# RUN npm install root swagger-express-mw && npm install --save swagger-express-mw --suppess-warnings
+# RUN npm install express --suppess-warnings
 
 # CICD REST API installation
-ENV HOME=/root
-RUN cd /cicd/nodejs/3scale-cicd-api; swagger project start
-RUN npm install -g swagger ;  cd /cicd/nodejs/3scale-cicd-api; swagger project start
+EXPOSE 10010
+RUN cd /cicd/nodejs/3scale-cicd-apinpm
+
 

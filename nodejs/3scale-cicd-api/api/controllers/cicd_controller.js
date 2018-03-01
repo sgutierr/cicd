@@ -9,6 +9,8 @@ use "child process" module of nodejs to execute any shell commands or scripts wi
 */
 
 const exec = require('child_process').exec;
+  
+const base_path = '/home/sgutierr/development/3Scale/Features/CLI_container';
 /*
  Modules make it possible to import JavaScript files into your application.  Modules are imported
  using 'require' statements that give you a reference to the module.
@@ -32,7 +34,9 @@ var util = require('util');
 module.exports = {
   configconnection: configconnection,
   createservice: createservice,
-  importservicedemo: importservicedemo
+  importservicedemo: importservicedemo,
+  testingservice: testingservice,
+  promotion_to_production
 
 };
 
@@ -47,7 +51,7 @@ function configconnection(req, res) {
   var subdomain = req.swagger.params.subdomain || 'stranger';
   var access_token = req.swagger.params.access_token || 'stranger';
   var wildcard_domain = req.swagger.params.wildcard_domain || 'stranger';
-  var yourscript = exec('sh /cicd/scripts/create_credentials.sh', {env: {'SUBDOMAIN': subdomain},env: {'ACCESS_TOKEN': access_token},env: {'WILDCARD_DOMAIN': wildcard_domain}},
+  var yourscript = exec('sh '+base_path+'/cicd/scripts/create_credentials.sh', {env: {'SUBDOMAIN': subdomain},env: {'ACCESS_TOKEN': access_token},env: {'WILDCARD_DOMAIN': wildcard_domain}},
   (error, stdout, stderr) => {
       console.log(`${stdout}`);
       console.log(`${stderr}`);
@@ -71,22 +75,23 @@ function configconnection(req, res) {
  */
 function createservice(req, res) {
     // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
-    var name = req.swagger.params.name || 'test_service';
-    var yourscript = exec('sh /cicd/scripts/create_service.sh', {env: {'SERVICE_NAME': name}},
+    var name = req.swagger.params.Service.value.name || 'test';
+    console.log(util.inspect(req.swagger.params, {depth: null}));
+    console.log ('SERVICE_NAME:'+name);
+    var yourscript = exec('sh '+base_path+'/cicd/scripts/create_service.sh '+name, {env: {'SERVICE_NAME':name},env: {'NODE_TLS_REJECT_UNAUTHORIZED':'0'}},
     (error, stdout, stderr) => {
-        console.log(`${stdout}`);
-        console.log(`${stderr}`);
+        console.log(stdout);
+        console.log(stderr);
         if (error !== null) {
             // this sends back a JSON response which is a single string
-            res.json(`exec error: ${error}`);
-            console.log(`exec error: ${error}`);
+            res.json('exec error:'+error);
+            console.log('exec error:'+ error);
         }
         else {
-          res.json('${stdout}');
+          res.json(stdout);
         }
     });
-  
-  }
+   }
 
 
 /*
@@ -97,48 +102,84 @@ function createservice(req, res) {
  */
 function importservicedemo(req, res) {
     // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
-    var name = req.swagger.params.name || 'test_service';
-    var access_token = req.swagger.params.access_token || 'stranger';
-    var apim = req.swagger.params.apim || 'stranger';  
-    var yourscript = exec('sh /cicd/scripts/import_service.sh', {env: {'SERVICE_NAME': name},env: {'ACCESS_TOKEN': access_token},env: {'APIM': apim}},
+    var name = req.swagger.params.Import.value.name;
+    var access_token = req.swagger.params.Import.value.access_token;
+    var apim = req.swagger.params.Import.value.apim ;  
+    var swaggerDef = req.swagger.params.Import.value.swaggerDef || '/cicd/swaggers/payment_swagger.json';
+    var yourscript = exec('sh '+base_path+'/cicd/scripts/import_service.sh '+name+' '+access_token+' '+apim+' '+swaggerDef, {env: {'SERVICE_NAME': name},env: {'ACCESS_TOKEN': access_token},env: {'APIM': apim},env: {'NODE_TLS_REJECT_UNAUTHORIZED':'0'}},
     (error, stdout, stderr) => {
-        console.log(`${stdout}`);
-        console.log(`${stderr}`);
+        console.log(stdout);
+        console.log(stderr);
         if (error !== null) {
             // this sends back a JSON response which is a single string
-            res.json(`exec error: ${error}`);
-            console.log(`exec error: ${error}`);
+            res.json('exec error:'+error);
+            console.log('exec error:'+ error);
         }
         else {
-          res.json('${stdout}');
+          res.json(stdout);
         }
     });
   
   }
 /*
-  Function for importing a 3scale demo service, it should take two parameters:
+  Function for testing a demo service, it should take two parameters:
 
   Param 1: a handle to the request object
   Param 2: a handle to the response object
  */
 function testingservice(req, res) {
     // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
-    var name = req.swagger.params.name || 'test_service';
-    var yourscript = exec('sh /cicd/scripts/test_service.sh', {env: {'SERVICE_NAME': name}},
+    var name = req.swagger.params.TestService.value.name || 'test';
+    // enviroment:= (sandbox || production)
+    var environment = req.swagger.params.TestService.value.environment;
+    //optional define a specific endpoint to check
+    var endpoint = req.swagger.params.TestService.value.endpoint;
+    if (endpoint != null) {
+        environment=environment+' '+endpoint;
+    }
+    var yourscript = exec('sh '+base_path+'/cicd/scripts/test_service.sh '+name+' '+environment , {env:  {'NODE_TLS_REJECT_UNAUTHORIZED':'0'}},
     (error, stdout, stderr) => {
-        console.log(`${stdout}`);
-        console.log(`${stderr}`);
+        console.log(stdout);
+        console.log(stderr);
         if (error !== null) {
             // this sends back a JSON response which is a single string
-            res.json(`exec error: ${error}`);
-            console.log(`exec error: ${error}`);
+            res.json('exec error:'+error);
+            console.log('exec error:'+ error);
         }
         else {
-          res.json('${stdout}');
+          res.json(stdout);
         }
     });
-  
+
   }
+
+  function promotion_to_production(req, res) {
+    // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
+    var name = req.swagger.params.Service.value.name;
+    // enviroment:= (sandbox || production)
+    var version = req.swagger.params.Service.value.version;
+    //optional define a specific endpoint to check
+    if (version != null) {
+        name=name+' '+version;
+    }
+    var yourscript = exec('sh '+base_path+'/cicd/scripts/promotion_to_production.sh '+name , {env:  {'NODE_TLS_REJECT_UNAUTHORIZED':'0'}},
+    (error, stdout, stderr) => {
+        console.log(stdout);
+        console.log(stderr);
+        if (error !== null) {
+            // this sends back a JSON response which is a single string
+            res.json('exec error:'+error);
+            console.log('exec error:'+ error);
+        }
+        else {
+          res.json(stdout);
+        }
+    });
+
+  }
+  
+
+
 
 
 

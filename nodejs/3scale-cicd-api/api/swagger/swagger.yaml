@@ -15,6 +15,7 @@ host: localhost:10010
 basePath: /
 schemes:
   - https
+  - http
 consumes:
   - application/json
 produces:
@@ -45,13 +46,12 @@ paths:
           schema:
             $ref: '#/definitions/Error'
   '/one-environment/new-service':
-      # binds a127 app logic to a route
     x-swagger-router-controller: cicd_controller
     post:
       description: New 3scale Service
       operationId: createservice
       parameters:
-        - name: body
+        - name: Service
           in: body
           description: Service name
           required: true
@@ -77,7 +77,7 @@ paths:
       description: Import demo service
       operationId: importservicedemo
       parameters:
-        - name: body
+        - name: Import
           in: body
           description: Importing a service
           required: true
@@ -97,18 +97,17 @@ paths:
           schema:
             $ref: '#/definitions/Error'
   '/one-environment/test-service':
-      # binds a127 app logic to a route
     x-swagger-router-controller: cicd_controller
     post:
       description: Testing a service 
       operationId: testingservice
       parameters:
-        - name: body
+        - name: TestService
           in: body
           description: Service Name
           required: true
           schema:
-           $ref:  '#/definitions/ServiceName'          
+           $ref:  '#/definitions/TestService'          
       responses:
         '200':
           description: Test service in staging API gateway
@@ -122,21 +121,22 @@ paths:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-  '/one-environment/delete-service':
+  '/one-environment/promotion-prod':
       # binds a127 app logic to a route
     x-swagger-router-controller: cicd_controller
-    delete:
-      description: Delete a Payment
-      operationId: Delete a Payment
+    post:
+      description: Promoting service to production gateways
+      operationId: promotion_to_production
       parameters:
-        - name: service_id
-          in: header
-          description: service_id
+        - name: Service
+          in: body
+          description: service_name
           required: true
-          type: string
+          schema:
+           $ref:  '#/definitions/ServiceName'   
       responses:
         '200':
-          description: Service deleted
+          description: Service promoted
           schema:
             $ref: '#/definitions/ServiceStatus'
         '403':
@@ -240,13 +240,29 @@ definitions:
       access_token:
         type: string
       apim:
-        type: string        
+        type: string
+      swaggerDef:
+        type: string          
   ServiceName:
     type: object
     required:
       - name
     properties:
       name:
+        type: string
+      version:
+        type: string
+  TestService:
+    type: object
+    required:
+      - name
+      - environment
+    properties:
+      name:
+        type: string
+      environment:
+        type: string
+      endpoint:
         type: string
   Credentials:
     type: object

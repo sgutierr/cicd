@@ -1,9 +1,12 @@
 #!/bin/sh
-
+SERVICE_NAME=$1
+ACCESS_TOKEN=$2
+APIM=$3
+SWAGGER=$4
 SERVICE_ID=$(3scale-cli services list | grep $SERVICE_NAME | awk '{ print $1 }')
 
-3scale-cli import swagger -f /cicd/swaggers/payment_swagger.json -p "{method}{path}" -m true --service $SERVICE_ID
-3scale-cli activedocs create --systemName PaymentsAPI  -f /cicd/swaggers/payment_swagger.json 
+3scale-cli import swagger -f $SWAGGER -p "{method}{path}" -m true --service $SERVICE_ID
+3scale-cli activedocs create --systemName PaymentsAPI  -f $SWAGGER 
 
 # Create two application plans (basic and unlimited)
 aplication_plan_basic_id=$(3scale-cli app-plan create --service $SERVICE_ID --plan Basic | awk '{ print $10; }')
