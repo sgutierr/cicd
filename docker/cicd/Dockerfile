@@ -130,6 +130,8 @@ RUN npm install -g swagger --suppess-warnings
 
 # CICD REST API installation
 EXPOSE 10010
-RUN cd /cicd/nodejs/3scale-cicd-apinpm
+RUN cd /cicd/nodejs/3scale-cicd-api
+RUN swagger project start
+
 
 
