@@ -125,13 +125,13 @@ RUN npm root install -g swagger
 # Swagger installation
 ENV HOME=/root
 RUN npm install -g swagger --suppess-warnings
-# RUN npm install root swagger-express-mw && npm install --save swagger-express-mw --suppess-warnings
-# RUN npm install express --suppess-warnings
+RUN npm install root swagger-express-mw && npm install --save swagger-express-mw --suppess-warnings
+RUN npm install express --suppess-warnings
 
 # CICD REST API installation
-EXPOSE 10010
-RUN cd /cicd/nodejs/3scale-cicd-api
-RUN swagger project start
+EXPOSE 10010 
+WORKDIR /cicd/nodejs/3scale-cicd-api
+CMD ["swagger", "project","start"] 
 
 
 
