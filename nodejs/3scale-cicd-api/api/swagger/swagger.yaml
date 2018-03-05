@@ -121,7 +121,6 @@ paths:
           schema:
             $ref: '#/definitions/Error'
   '/one-environment/promotion-prod':
-      # binds a127 app logic to a route
     x-swagger-router-controller: cicd_controller
     post:
       description: Promoting service to production gateways
@@ -147,35 +146,20 @@ paths:
           schema:
             $ref: '#/definitions/Error'
   '/two-environments/copy-service':
-      # binds a127 app logic to a route
     x-swagger-router-controller: cicd_controller
     post:
       description: Copy service between environments
-      operationId: Copy service between environments
+      operationId: copy_service
       parameters:
-        - name: service_id_src
-          in: header
-          description: service_id_src
+        - name: CopyService
+          in: body
+          description: copy_parameters
           required: true
-          type: string
-        - name: service_id_dest
-          in: header
-          description: service_id_dest
-          required: true
-          type: string
-        - name: source
-          in: header
-          description: source
-          required: true
-          type: string
-        - name: destination
-          in: header
-          description: destination
-          required: true
-          type: string
+          schema:
+           $ref:  '#/definitions/CopyUpdate'   
       responses:
         '200':
-          description: SMS Details response
+          description: Service configuration copied
           schema:
             $ref: '#/definitions/ServiceStatus'
         '403':
@@ -188,31 +172,17 @@ paths:
             $ref: '#/definitions/Error'
   '/two-environments/update-service':
       # binds a127 app logic to a route
-    x-swagger-router-controller: hello_world
+    x-swagger-router-controller: cicd_controller
     post:
       description: Update service between environments
-      operationId: Update service between environments
+      operationId: update_service
       parameters:
-        - name: service_id_src
-          in: header
-          description: service_id_src
+        - name: UpdateService
+          in: body
+          description: update_parameters
           required: true
-          type: string
-        - name: service_id_dest
-          in: header
-          description: service_id_dest
-          required: true
-          type: string
-        - name: source
-          in: header
-          description: source
-          required: true
-          type: string
-        - name: destination
-          in: header
-          description: destination
-          required: true
-          type: string
+          schema:
+           $ref:  '#/definitions/CopyUpdate'   
       responses:
         '200':
           description: Service updated
@@ -278,6 +248,22 @@ definitions:
       access_token:
         type: string
       wildcard_domain:
+        type: string        
+  CopyUpdate:
+    type: object
+    required:
+      - id_source
+      - id_dest
+      - source
+      - destination
+    properties:
+      id_source:
+        type: string
+      id_dest:
+        type: string
+      source:
+        type: string        
+      destination:
         type: string        
   ServiceStatus:
     required:

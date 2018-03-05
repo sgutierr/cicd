@@ -10,7 +10,7 @@ use "child process" module of nodejs to execute any shell commands or scripts wi
 
 const exec = require('child_process').exec;
   
-const base_path = '';
+const base_path = '/home/sgutierr/development/3Scale/Features/CLI_container';
 /*
  Modules make it possible to import JavaScript files into your application.  Modules are imported
  using 'require' statements that give you a reference to the module.
@@ -36,7 +36,9 @@ module.exports = {
   createservice: createservice,
   importservicedemo: importservicedemo,
   testingservice: testingservice,
-  promotion_to_production
+  promotion_to_production: promotion_to_production,
+  copy_service: copy_service,
+  update_service: update_service
 
 };
 
@@ -177,7 +179,53 @@ function testingservice(req, res) {
     });
 
   }
+
+
   
+  function copy_service(req, res) {
+    // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
+    var id_source = req.swagger.params.CopyService.value.id_source;
+    var id_dest = req.swagger.params.CopyService.value.id_dest;
+    var source = req.swagger.params.CopyService.value.source;
+    var destination = req.swagger.params.CopyService.value.destination;
+    
+    var yourscript = exec('sh '+base_path+'/cicd/scripts/copy_service.sh '+id_source+' '+id_dest+' '+source+' '+destination , {env:  {'NODE_TLS_REJECT_UNAUTHORIZED':'0'}},
+    (error, stdout, stderr) => {
+        console.log(stdout);
+        console.log(stderr);
+        if (error !== null) {
+            // this sends back a JSON response which is a single string
+            res.json('exec error:'+error);
+            console.log('exec error:'+ error);
+        }
+        else {
+          res.json(stdout);
+        }
+    });
+
+  } 
+  function update_service(req, res) {
+    // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
+    var id_source = req.swagger.params.UpdateService.value.id_source;
+    var id_dest = req.swagger.params.UpdateService.value.id_dest;
+    var source = req.swagger.params.UpdateService.value.source;
+    var destination = req.swagger.params.UpdateService.value.destination;
+    
+    var yourscript = exec('sh '+base_path+'/cicd/scripts/update_service.sh '+id_source+' '+id_dest+' '+source+' '+destination , {env:  {'NODE_TLS_REJECT_UNAUTHORIZED':'0'}},
+    (error, stdout, stderr) => {
+        console.log(stdout);
+        console.log(stderr);
+        if (error !== null) {
+            // this sends back a JSON response which is a single string
+            res.json('exec error:'+error);
+            console.log('exec error:'+ error);
+        }
+        else {
+          res.json(stdout);
+        }
+    });
+
+  }
 
 
 
