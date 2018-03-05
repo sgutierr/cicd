@@ -50,9 +50,9 @@ module.exports = {
  */
 function configconnection(req, res) {
   // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
-  var subdomain = req.swagger.Credentials.params.subdomain || 'stranger';
-  var access_token = req.swagger.params.Credentials.access_token || 'stranger';
-  var wildcard_domain = req.swagger.Credentials.params.wildcard_domain || 'stranger';
+  var subdomain = req.swagger.params.Credentials.subdomain;
+  var access_token = req.swagger.params.Credentials.access_token;
+  var wildcard_domain = req.swagger.Credentials.params.wildcard_domain;
   var yourscript = exec('bash '+base_path+'/cicd/scripts/create_credentials.sh '+subdomain+' '+access_token+' '+wildcard_domain,
   (error, stdout, stderr) => {
     console.log(stdout);
