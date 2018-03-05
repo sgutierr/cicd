@@ -127,6 +127,8 @@ ENV HOME=/root
 RUN npm install -g swagger --suppess-warnings
 RUN npm install root swagger-express-mw && npm install --save swagger-express-mw --suppess-warnings
 RUN npm install express --suppess-warnings
+RUN npm install express@4.12.3 && npm install swagger-express-mw@0.1.0
+
 
 # CICD REST API installation
 EXPOSE 10010 

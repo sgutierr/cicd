@@ -27,7 +27,7 @@ paths:
       description: Config 3scale Connection
       operationId: configconnection
       parameters:
-       - name: body
+       - name: Credentials
          in: body
          description: id_subdomain
          required: true

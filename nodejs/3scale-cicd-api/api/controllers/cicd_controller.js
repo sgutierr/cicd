@@ -10,7 +10,7 @@ use "child process" module of nodejs to execute any shell commands or scripts wi
 
 const exec = require('child_process').exec;
   
-const base_path = '/home/sgutierr/development/3Scale/Features/CLI_container';
+const base_path = '';
 /*
  Modules make it possible to import JavaScript files into your application.  Modules are imported
  using 'require' statements that give you a reference to the module.
@@ -50,23 +50,22 @@ module.exports = {
  */
 function configconnection(req, res) {
   // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
-  var subdomain = req.swagger.params.subdomain || 'stranger';
-  var access_token = req.swagger.params.access_token || 'stranger';
-  var wildcard_domain = req.swagger.params.wildcard_domain || 'stranger';
-  var yourscript = exec('sh '+base_path+'/cicd/scripts/create_credentials.sh', {env: {'SUBDOMAIN': subdomain},env: {'ACCESS_TOKEN': access_token},env: {'WILDCARD_DOMAIN': wildcard_domain}},
+  var subdomain = req.swagger.Credentials.params.subdomain || 'stranger';
+  var access_token = req.swagger.params.Credentials.access_token || 'stranger';
+  var wildcard_domain = req.swagger.Credentials.params.wildcard_domain || 'stranger';
+  var yourscript = exec('bash '+base_path+'/cicd/scripts/create_credentials.sh '+subdomain+' '+access_token+' '+wildcard_domain,
   (error, stdout, stderr) => {
-      console.log(`${stdout}`);
-      console.log(`${stderr}`);
-      if (error !== null) {
-          // this sends back a JSON response which is a single string
-          res.json(`exec error: ${error}`);
-          console.log(`exec error: ${error}`);
-      }
-      else {
-        res.json('${stdout}');
-      }
+    console.log(stdout);
+    console.log(stderr);
+    if (error !== null) {
+        // this sends back a JSON response which is a single string
+        res.json('exec error:'+error);
+        console.log('exec error:'+ error);
+    }
+    else {
+      res.json(stdout);
+    }
   });
-
 }
 
 /*
