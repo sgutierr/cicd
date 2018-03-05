@@ -36,6 +36,11 @@ paths:
       responses:
         '200':
           description: 3Scale connection configured 
+          schema:
+            title: Created
+            properties:
+              message:
+                type: string
         '403':
           description: Configuration failed
           schema:
@@ -264,6 +269,8 @@ definitions:
       source:
         type: string        
       destination:
+        type: string        
+      name:
         type: string        
   ServiceStatus:
     required:

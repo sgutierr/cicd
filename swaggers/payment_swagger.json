@@ -7,15 +7,15 @@
       "termsOfService": "http://swagger.io/terms/",
       "contact": {
         "name": "The Payment DEMO Team",
-        "email": "sms@3scale.net",
-        "url": "http://sms.3scale.net"
+        "email": "sgutierr@redhat.com",
+        "url": "http://www.redhat.com"
       },
       "license": {
-        "name": "MIT",
+        "name": "3Scale-Red Hat",
         "url": "http://github.com/3scale/sms/LICENSE-MIT"
       }
     },
-    "host": "internal-echo-api.3scale.net",
+    "host": "payments-staging.5.9.12.13.xip.io",
     "basePath": "/",
     "schemes": [
       "https"
@@ -34,7 +34,7 @@
           "parameters": [
             {
               "name": "user_key",
-              "in": "header",
+              "in": "query",
               "description": "user_key",
               "required": true,
               "type": "string",
@@ -78,7 +78,7 @@
           "parameters": [
             {
               "name": "user_key",
-              "in": "header",
+              "in": "query",
               "description": "user_key",
               "required": true,
               "type": "string",
@@ -102,7 +102,7 @@
           ],
           "responses": {
             "200": {
-              "description": "SMS Details response",
+              "description": "Request payment info",
               "schema": {
                 "$ref": "#/definitions/SMSDetails"
               }
@@ -129,7 +129,7 @@
           "parameters": [
             {
               "name": "user_key",
-              "in": "header",
+              "in": "query",
               "description": "user_key",
               "required": true,
               "type": "string",
@@ -182,7 +182,7 @@
           "parameters": [
             {
               "name": "user_key",
-              "in": "header",
+              "in": "query",
               "description": "user_key",
               "required": true,
               "type": "string",
@@ -242,7 +242,7 @@
           "parameters": [
             {
               "name": "user_key",
-              "in": "header",
+              "in": "query",
               "description": "user_key",
               "required": true,
               "type": "string",

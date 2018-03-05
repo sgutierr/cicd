@@ -10,7 +10,7 @@ use "child process" module of nodejs to execute any shell commands or scripts wi
 
 const exec = require('child_process').exec;
   
-const base_path = '';
+const base_path = '/home/sgutierr/development/3Scale/Features/CLI_container';
 /*
  Modules make it possible to import JavaScript files into your application.  Modules are imported
  using 'require' statements that give you a reference to the module.
@@ -53,7 +53,8 @@ function configconnection(req, res) {
   var subdomain = req.swagger.params.Credentials.value.subdomain;
   var access_token = req.swagger.params.Credentials.value.access_token;
   var wildcard_domain = req.swagger.params.Credentials.value.wildcard_domain;
-  var yourscript = exec('bash '+base_path+'/cicd/scripts/create_credentials.sh '+subdomain+' '+access_token+' '+wildcard_domain,
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED=0;
+  var yourscript = exec('sh '+base_path+'/cicd/scripts/create_credentials.sh '+subdomain+' '+access_token+' '+wildcard_domain, process.env,
   (error, stdout, stderr) => {
     console.log(stdout);
     console.log(stderr);
@@ -63,9 +64,10 @@ function configconnection(req, res) {
         console.log('exec error:'+ error);
     }
     else {
-      res.json(stdout);
+        res.json({"200":"Configuration created"});
     }
-  });
+});
+
 }
 
 /*
@@ -79,7 +81,8 @@ function createservice(req, res) {
     var name = req.swagger.params.Service.value.name || 'test';
     console.log(util.inspect(req.swagger.params, {depth: null}));
     console.log ('SERVICE_NAME:'+name);
-    var yourscript = exec('sh '+base_path+'/cicd/scripts/create_service.sh '+name, {env: {'SERVICE_NAME':name},env: {'NODE_TLS_REJECT_UNAUTHORIZED':'0'}},
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED=0;
+    var yourscript = exec('sh '+base_path+'/cicd/scripts/create_service.sh '+name, process.env,
     (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
@@ -107,7 +110,8 @@ function importservicedemo(req, res) {
     var access_token = req.swagger.params.Import.value.access_token;
     var apim = req.swagger.params.Import.value.apim ;  
     var swaggerDef = req.swagger.params.Import.value.swaggerDef || '/cicd/swaggers/payment_swagger.json';
-    var yourscript = exec('sh '+base_path+'/cicd/scripts/import_service.sh '+name+' '+access_token+' '+apim+' '+swaggerDef, {env: {'SERVICE_NAME': name},env: {'ACCESS_TOKEN': access_token},env: {'APIM': apim},env: {'NODE_TLS_REJECT_UNAUTHORIZED':'0'}},
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED=0;
+    var yourscript = exec('sh '+base_path+'/cicd/scripts/import_service.sh '+name+' '+access_token+' '+apim+' '+swaggerDef, process.env,
     (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
@@ -138,7 +142,8 @@ function testingservice(req, res) {
     if (endpoint != null) {
         environment=environment+' '+endpoint;
     }
-    var yourscript = exec('sh '+base_path+'/cicd/scripts/test_service.sh '+name+' '+environment , {env:  {'NODE_TLS_REJECT_UNAUTHORIZED':'0'}},
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED=0;
+    var yourscript = exec('sh '+base_path+'/cicd/scripts/test_service.sh '+name+' '+environment , process.env,
     (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
@@ -163,7 +168,8 @@ function testingservice(req, res) {
     if (version != null) {
         name=name+' '+version;
     }
-    var yourscript = exec('sh '+base_path+'/cicd/scripts/promotion_to_production.sh '+name , {env:  {'NODE_TLS_REJECT_UNAUTHORIZED':'0'}},
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED=0;
+    var yourscript = exec('sh '+base_path+'/cicd/scripts/promotion_to_production.sh '+name ,process.env,
     (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
@@ -184,11 +190,11 @@ function testingservice(req, res) {
   function copy_service(req, res) {
     // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
     var id_source = req.swagger.params.CopyService.value.id_source;
-    var id_dest = req.swagger.params.CopyService.value.id_dest;
+    var name = req.swagger.params.CopyService.value.name || 'copied_service';
     var source = req.swagger.params.CopyService.value.source;
     var destination = req.swagger.params.CopyService.value.destination;
-    
-    var yourscript = exec('sh '+base_path+'/cicd/scripts/copy_service.sh '+id_source+' '+id_dest+' '+source+' '+destination , {env:  {'NODE_TLS_REJECT_UNAUTHORIZED':'0'}},
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED=0;
+    var yourscript = exec('sh '+base_path+'/cicd/scripts/copy_service.sh '+id_source+' '+source+' '+destination+' '+name , process.env,
     (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
@@ -209,8 +215,8 @@ function testingservice(req, res) {
     var id_dest = req.swagger.params.UpdateService.value.id_dest;
     var source = req.swagger.params.UpdateService.value.source;
     var destination = req.swagger.params.UpdateService.value.destination;
-    
-    var yourscript = exec('sh '+base_path+'/cicd/scripts/update_service.sh '+id_source+' '+id_dest+' '+source+' '+destination , {env:  {'NODE_TLS_REJECT_UNAUTHORIZED':'0'}},
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED=0;
+    var yourscript = exec('sh '+base_path+'/cicd/scripts/update_service.sh '+id_source+' '+id_dest+' '+source+' '+destination , process.env,
     (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
