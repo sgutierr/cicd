@@ -114,9 +114,6 @@ RUN cd $HOME; mkdir .3scale
 # Install CMS tool
 RUN cd /cicd/cms; gem install 3scale-cms-0.1.1.gem
 
-# Setup execution permisssions on scripts
-RUN chmod 711 /cicd/scripts/*
-
 # Patch for 3Scale-api 
 RUN cp -f /cicd/3scale-api-ruby/*.rb /usr/local/rbenv/versions/2.4.3/lib/ruby/gems/2.4.0/gems/3scale-api-0.1.5/lib/3scale/api
 
@@ -128,8 +125,19 @@ RUN npm install -g swagger --suppess-warnings
 
 # CICD REST API installation
 EXPOSE 10010 
+
+RUN cd /cicd/nodejs/3scale-cicd-api && npm install express@4.16.2 && npm install swagger-express-mw@0.1.0
+
+# Setup execution permisssions on scripts
+ENV PATH=/cicd/scripts:/cicd/nodejs/3scale-cicd-api:${PATH} 
+RUN chgrp -R 0 /cicd/scripts && \
+    chmod -R g=u /cicd/scripts  && \
+    chmod g=u /etc/passwd &&\
+    chmod -R u+x /cicd/scripts
+
+### Containers should NOT run as root as a good practice
+## USER 1001
 WORKDIR /cicd/nodejs/3scale-cicd-api
-RUN npm install express@4.16.2 && npm install swagger-express-mw@0.1.0
 CMD ["swagger", "project","start"] 
 
 
