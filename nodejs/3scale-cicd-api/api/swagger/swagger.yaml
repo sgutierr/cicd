@@ -237,7 +237,7 @@ definitions:
       environment:
         type: string
         enum:
-          - staging
+          - sandbox
           - production        
       endpoint:
         type: string
