@@ -1,0 +1,19 @@
+apiVersion: "v1"
+kind: "BuildConfig"
+metadata:
+  name: "ci-cd-build"
+spec:
+  output:
+    to:
+      kind: "ImageStreamTag"
+      name: "cicd:latest"
+  source:
+    git:
+      uri: "https:/github.com/sgutierr/cicd.git"
+    sourceSecret:
+      name: "gitsecret"
+  strategy:
+    sourceStrategy:
+      from:
+        kind: "ImageStreamTag"
+        name: "3scale-ci-cd:latest"

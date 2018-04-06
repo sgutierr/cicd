@@ -130,9 +130,10 @@ RUN cd /cicd/nodejs/3scale-cicd-api && npm install express@4.16.2 && npm install
 
 # Setup execution permisssions on scripts
 ENV PATH=/cicd/scripts:/cicd/nodejs/3scale-cicd-api:${PATH} 
-RUN chgrp -R 0 /cicd/scripts && \
+RUN git pull origin master && \
+    chgrp -R 0 /cicd/scripts && \
     chmod -R g=u /cicd/scripts  && \
-    chmod g=u /etc/passwd &&\
+    chmod g=u /etc/passwd && \
     chmod -R u+x /cicd/scripts
 
 ### Containers should NOT run as root as a good practice
