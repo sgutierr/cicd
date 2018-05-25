@@ -1,0 +1,40 @@
+{
+    "apiVersion": "v1",
+    "kind": "Route",
+    "metadata": {
+        "name": "eurobankpayments-3scale-apicast-staging-route",
+        "namespace": "3scale-poc"
+    },
+    "spec": {
+        "host": "eurobankpayments-3scale-apicast-staging.5.9.12.13.xip.io",
+        "port": {
+            "targetPort": "gateway"
+        },
+        "tls": {
+            "insecureEdgeTerminationPolicy": "Allow",
+            "termination": "edge"
+        },
+        "to": {
+            "kind": "Service",
+            "name": "apicast-staging",
+            "weight": 100
+        },
+        "wildcardPolicy": "None"
+    },
+    "status": {
+        "ingress": [
+            {
+                "conditions": [
+                    {
+                        "lastTransitionTime": "2018-01-15T15:25:25Z",
+                        "status": "True",
+                        "type": "Admitted"
+                    }
+                ],
+                "host": "eurobankpayments-3scale-apicast-staging.5.9.12.13.xip.io",
+                "routerName": "router",
+                "wildcardPolicy": "None"
+            }
+        ]
+    }
+}
