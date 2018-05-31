@@ -24,6 +24,7 @@ if [ -z "$SERVICE_ID" ];
   echo Delete service
   # Create a new service for this minor release.
   3scale-cli services create --serviceName $SERVICE_NAME
+  SERVICE_ID=$(3scale-cli services list | grep $BASE_NAME-v$MAJOR | awk '{ print $1 }')
   echo Recreate service
   
 fi
