@@ -41,4 +41,7 @@ production_endpoint=$(echo "$production_endpoint" | tr '[_]' '-')
 
 3scale-cli proxy update -s $SERVICE_ID -S $sanbox_endpoint -e $production_endpoint -b $backend_endpoint
 
+# Create two application plans (basic and unlimited)
+aplication_plan_basic_id=$(3scale-cli app-plan create --service $SERVICE_ID --plan Basic | awk '{ print $10; }')
+
 
