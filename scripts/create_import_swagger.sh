@@ -38,10 +38,10 @@ app_id=$(3scale-cli applications create --account $account_id --plan $plan_id --
 
 api_test_path=$(3scale-cli proxy show -s $SERVICE_ID | grep api_test_path | awk '{ print $2;}')
 sanbox_endpoint=$(3scale-cli proxy show -s $SERVICE_ID | grep sandbox_endpoint: | awk '{ print $2;}')
-sanbox_endpoint=echo "$sanbox_endpoint" | tr '[_]' '-'
+sanbox_endpoint=$(echo "$sanbox_endpoint" | tr '[_]' '-')
 backend_endpoint=$(3scale-cli proxy show -s $SERVICE_ID | grep api_backend: | awk '{ print $2;}' | head -n 1)
 production_endpoint=$(3scale-cli proxy show -s $SERVICE_ID | grep endpoint: | awk '{ print $2;}' | head -n 1)
-production_endpoint=echo "$production_endpoint" | tr '[_]' '-'
+production_endpoint=$(echo "$production_endpoint" | tr '[_]' '-')
 
 3scale-cli proxy update -s $SERVICE_ID -S $sanbox_endpoint -e $production_endpoint -b $backend_endpoint
 
