@@ -1,15 +1,15 @@
-pipeline {
-    agent any
-    stages {
+node {
         stage ('Integration Stage'){
+          build job: 'update-git'    
           build job: '1-Import-service', parameters: [[$class: 'StringParameterValue', name: 'SWG', value: '/cicd/swaggers/payment_swagger_v4.json']]
+          build job: '2-Test-staging', parameters: [[$class: 'StringParameterValue', name: 'SERVICE_NAME', value: 'Payment-API-v1.0'], [$class: 'StringParameterValue', name: 'ENVIRONMENT', value: 'sandbox']]
         }
         stage ('Testing Stage'){
+          build job: '3-Promotion-to-production-API-GW', parameters: [[$class: 'StringParameterValue', name: 'SERVICE_NAME', value: 'Payment-API-v1.0']]    
         }
 
         stage ('Production Stage'){
+         build job: '4-Copy-service-between-3Scale-environment-to-Prod', parameters: [[$class: 'StringParameterValue', name: 'SERVICE_NAME', value: 'Payment-API-v1.0'], [$class: 'StringParameterValue', name: 'SRC', value: 'https://8eb8a75fc782615dec1e330f200c84507893f74e0c6bd2457e0c170833828803@3scale-admin.5.9.12.13.xip.io'],[$class: 'StringParameterValue', name: 'DEST', value: 'https://b95e45339a48da4565caec9ff161b8a45dc12efa3757d4a7b13301f22af806bd@demo-env-admin.3scale.net']]    
 
         }
-
-    }
 }
