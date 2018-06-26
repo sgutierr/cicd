@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+    stages {
+        stage ('Integration Stage'){
+          build job: '1-Import-service', parameters: [[$class: 'StringParameterValue', name: 'SWG', value: /cicd/swaggers/payment_swagger_v4.json]]
+        }
+        stage ('Testing Stage'){
+        }
+
+        stage ('Production Stage'){
+
+        }
+
+    }
+}
