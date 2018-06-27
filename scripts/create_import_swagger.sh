@@ -7,7 +7,7 @@ BASE_NAME=$(more $SWG | grep title | cut -d '"' -f4 | head -1)
 MAJOR=$(echo $VERS | cut -d "." -f1)
 
 SERVICE_NAME=$BASE_NAME-v$VERS
-echo $SERVICE_NAME
+echo Service name:$SERVICE_NAME
 
 SERVICE_ID=$(3scale-cli services list | grep $BASE_NAME-v$MAJOR | awk '{ print $1 }')
 
@@ -17,7 +17,7 @@ if [ -z "$SERVICE_ID" ];
   # Create a new service because is a new release
   3scale-cli services create --serviceName $SERVICE_NAME
   SERVICE_ID=$(3scale-cli services list | grep $BASE_NAME-v$MAJOR | awk '{ print $1 }')
-  echo New service
+  echo New service:$SERVICE_ID
   else
   # Drop service
   3scale-cli services delete -s $SERVICE_ID -c $SERVICE_NAME 
@@ -25,7 +25,7 @@ if [ -z "$SERVICE_ID" ];
   # Create a new service for this minor release.
   3scale-cli services create --serviceName $SERVICE_NAME
   SERVICE_ID=$(3scale-cli services list | grep $BASE_NAME-v$MAJOR | awk '{ print $1 }')
-  echo Recreate service
+  echo Recreate service:$SERVICE_ID
   
 fi
 # Import Swagger defintion
