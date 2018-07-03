@@ -1,11 +1,13 @@
 #!/bin/sh
 
 SWG=$1
+# get version field 
 VERS=$(more $SWG | grep version | cut -d '"' -f4 | head -1)
+# get title field
 BASE_NAME=$(more $SWG | grep title | cut -d '"' -f4 | head -1)
-
 MAJOR=$(echo $VERS | cut -d "." -f1)
 
+#Compose service name
 SERVICE_NAME=$BASE_NAME-v$VERS
 echo Service name:$SERVICE_NAME
 
@@ -17,6 +19,8 @@ if [ -z "$SERVICE_ID" ];
   # Create a new service because is a new release
   3scale-cli services create --serviceName $SERVICE_NAME
   SERVICE_ID=$(3scale-cli services list | grep $BASE_NAME-v$MAJOR | awk '{ print $1 }')
+  SYSTEM_ID=$(3scale-cli services list | grep $BASE_NAME-v$MAJOR | awk '{ print $4 }')
+
   echo New service:$SERVICE_ID
   else
   # Drop service
@@ -25,12 +29,14 @@ if [ -z "$SERVICE_ID" ];
   # Create a new service for this minor release.
   3scale-cli services create --serviceName $SERVICE_NAME
   SERVICE_ID=$(3scale-cli services list | grep $BASE_NAME-v$MAJOR | awk '{ print $1 }')
-  echo Recreate service:$SERVICE_ID
-  
+  echo Recreate service:$SERVICE_ID  
 fi
 # Import Swagger defintion
 3scale-cli import swagger -f $SWG -p "{method}{path}" -m true --service $SERVICE_ID
-3scale-cli activedocs create --systemName $SERVICE_NAME -f $SWG 
+# Delete existing ActiveDocs and create new version
+AD_ID=$(3scale-cli activedocs list | grep $SYSTEM_NAME | awk '{ print $1 }')
+3scale-cli activedocs delete -s $AD_ID
+3scale-cli activedocs create --systemName $SYSTEM_NAME -f $SWG 
 
 api_test_path=$(3scale-cli proxy show -s $SERVICE_ID | grep api_test_path | awk '{ print $2;}')
 sanbox_endpoint=$(3scale-cli proxy show -s $SERVICE_ID | grep sandbox_endpoint: | awk '{ print $2;}')
