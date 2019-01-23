@@ -1,0 +1,3784 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "title" : "Openbanking.co.uk Account and Transaction APIs",
+    "version" : "1.0"
+  },
+  "host" : "openbanking-uk.b9ad.pro-us-east-1.openshiftapps.com",
+  "basePath" : "/open-banking/v1.1",
+  "schemes" : [ "https" ],
+  "consumes" : [ "application/json" ],
+  "produces" : [ "application/json" ],
+  "paths" : {
+    "/account-requests" : {
+      "post" : {
+        "tags" : [ "account-requests" ],
+        "summary" : "Create an account request",
+        "description" : "Create an account request",
+        "operationId" : "AccountRequestsPost",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Accept",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "Content-Type",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-financial-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-last-logged-time",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-ip-address",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-interaction-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-jws-signature",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "",
+            "schema" : {
+              "$ref" : "#/definitions/SimpleCreation"
+            },
+            "examples" : {
+              "application/json" : {
+                "Data" : {
+                  "AccountRequestId" : "88379",
+                  "Status" : "AwaitingAuthorisation",
+                  "CreationDateTime" : "2017-05-02T00:00:00+00:00",
+                  "Permissions" : [ "ReadAccountsDetail", "ReadBalances", "ReadBeneficiariesDetail", "ReadDirectDebits", "ReadProducts", "ReadStandingOrdersDetail", "ReadTransactionsCredits", "ReadTransactionsDebits", "ReadTransactionsDetail" ],
+                  "ExpirationDateTime" : "2017-08-02T00:00:00+00:00",
+                  "TransactionFromDateTime" : "2017-05-03T00:00:00+00:00",
+                  "TransactionToDateTime" : "2017-12-03T00:00:00+00:00"
+                },
+                "Risk" : { },
+                "Links" : {
+                  "Self" : "/account-requests/88379"
+                },
+                "Meta" : {
+                  "TotalPages" : 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/account-requests/{AccountRequestId}" : {
+      "get" : {
+        "tags" : [ "account-requests" ],
+        "summary" : "Get an account request",
+        "description" : "Get an account request",
+        "operationId" : "AccountRequestsByAccountRequestIdGet",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "AccountRequestId",
+          "in" : "path",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "Accept",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-financial-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-last-logged-time",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-ip-address",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-interaction-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "schema" : {
+              "$ref" : "#/definitions/Get88378AccountRequest(afterValidation)"
+            },
+            "examples" : {
+              "application/json" : {
+                "Data" : {
+                  "AccountRequestId" : "88378",
+                  "Status" : "Authorised",
+                  "CreationDateTime" : "2017-05-02T00:00:00+00:00",
+                  "Permissions" : [ "ReadAccountsDetail", "ReadBalances", "ReadBeneficiariesDetail", "ReadDirectDebits", "ReadProducts", "ReadStandingOrdersDetail", "ReadTransactionsCredits", "ReadTransactionsDebits", "ReadTransactionsDetail" ],
+                  "ExpirationDateTime" : "2017-08-02T00:00:00+00:00",
+                  "TransactionFromDateTime" : "2017-05-03T00:00:00+00:00",
+                  "TransactionToDateTime" : "2017-12-03T00:00:00+00:00"
+                },
+                "Risk" : { },
+                "Links" : {
+                  "Self" : "/account-requests/88379"
+                },
+                "Meta" : {
+                  "TotalPages" : 1
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "account-requests" ],
+        "summary" : "Delete an account request",
+        "description" : "Delete an account request",
+        "operationId" : "AccountRequestsByAccountRequestIdDelete",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "AccountRequestId",
+          "in" : "path",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "Accept",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-financial-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "",
+            "schema" : {
+              "type" : "object"
+            }
+          }
+        }
+      }
+    },
+    "/accounts" : {
+      "get" : {
+        "tags" : [ "accounts" ],
+        "summary" : "Get Accounts",
+        "description" : "Get a list of accounts",
+        "operationId" : "AccountsGet",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Accept",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-financial-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-last-logged-time",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-ip-address",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-interaction-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "schema" : {
+              "$ref" : "#/definitions/GetBulkAccounts"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{AccountId}" : {
+      "get" : {
+        "tags" : [ "accounts" ],
+        "summary" : "Get Account",
+        "description" : "Get an account",
+        "operationId" : "AccountsByAccountIdGet",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "AccountId",
+          "in" : "path",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "Accept",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-financial-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-last-logged-time",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-ip-address",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-interaction-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "schema" : {
+              "$ref" : "#/definitions/GetAccount31820"
+            },
+            "examples" : {
+              "application/json" : {
+                "Data" : {
+                  "Account" : [ {
+                    "AccountId" : "31820",
+                    "Currency" : "GBP",
+                    "Nickname" : "Household",
+                    "Account" : {
+                      "SchemeName" : "SortCodeAccountNumber",
+                      "Identification" : "80200110203348",
+                      "Name" : "Mr Kevin"
+                    }
+                  } ]
+                },
+                "Links" : {
+                  "Self" : "/accounts/31820"
+                },
+                "Meta" : {
+                  "TotalPages" : 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{AccountId}/transactions" : {
+      "get" : {
+        "tags" : [ "accounts" ],
+        "summary" : "Get Account Transactions",
+        "description" : "Get transactions related to an account",
+        "operationId" : "AccountsTransactionsByAccountIdGet",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "fromBookingDateTime",
+          "in" : "query",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "toBookingDateTime",
+          "in" : "query",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "AccountId",
+          "in" : "path",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "Accept",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-financial-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-last-logged-time",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-ip-address",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-interaction-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "schema" : {
+              "$ref" : "#/definitions/GetAccount31820Transactions"
+            },
+            "examples" : {
+              "application/json" : {
+                "Data" : {
+                  "Transaction" : [ {
+                    "AccountId" : "31820",
+                    "TransactionId" : "567",
+                    "TransactionReference" : "Ref 124",
+                    "Amount" : {
+                      "Amount" : "100.00",
+                      "Currency" : "GBP"
+                    },
+                    "CreditDebitIndicator" : "Debit",
+                    "Status" : "Booked",
+                    "BookingDateTime" : "2017-05-02T14:22:09+00:00",
+                    "ValueDateTime" : "2017-05-02T14:22:09+00:00",
+                    "TransactionInformation" : "Paid the gas bill",
+                    "AddressLine" : "Coventry",
+                    "BankTransactionCode" : {
+                      "Code" : "IssuedCreditTransfer",
+                      "SubCode" : "AutomaticTransfer"
+                    },
+                    "ProprietaryBankTransactionCode" : {
+                      "Code" : "DirectDebit",
+                      "Issuer" : "AlphaBank"
+                    },
+                    "Balance" : {
+                      "Amount" : {
+                        "Amount" : "57.36",
+                        "Currency" : "GBP"
+                      },
+                      "CreditDebitIndicator" : "Debit",
+                      "Type" : "InterimBooked"
+                    }
+                  } ]
+                },
+                "Links" : {
+                  "Self" : "/accounts/31820/transactions/"
+                },
+                "Meta" : {
+                  "TotalPages" : 1,
+                  "FirstAvailableDateTime" : "2017-05-03T00:00:00+00:00",
+                  "LastAvailableDateTime" : "2017-12-03T00:00:00+00:00"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{AccountId}/beneficiaries" : {
+      "get" : {
+        "tags" : [ "accounts" ],
+        "summary" : "Get Account Beneficiaries",
+        "description" : "Get Beneficiaries related to an account",
+        "operationId" : "AccountsBeneficiariesByAccountIdGet",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "AccountId",
+          "in" : "path",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "Accept",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-financial-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-last-logged-time",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-ip-address",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-interaction-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "schema" : {
+              "$ref" : "#/definitions/GetAccount31820Beneficiaries"
+            },
+            "examples" : {
+              "application/json" : {
+                "Data" : {
+                  "Beneficiary" : [ {
+                    "AccountId" : "31820",
+                    "BeneficiaryId" : "Ben37",
+                    "Reference" : "Golf Club",
+                    "CreditorAccount" : {
+                      "SchemeName" : "SortCodeAccountNumber",
+                      "Identification" : "87562298675421",
+                      "Name" : "Mr Large"
+                    }
+                  } ]
+                },
+                "Links" : {
+                  "Self" : "/accounts/31820/beneficiaries/"
+                },
+                "Meta" : {
+                  "TotalPages" : 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{AccountId}/balances" : {
+      "get" : {
+        "tags" : [ "accounts" ],
+        "summary" : "Get Account Balances",
+        "description" : "Get Balances related to an account",
+        "operationId" : "AccountsBalancesByAccountIdGet",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "AccountId",
+          "in" : "path",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "Accept",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-financial-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-last-logged-time",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-ip-address",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-interaction-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "schema" : {
+              "$ref" : "#/definitions/GetAccount22289Balances"
+            },
+            "examples" : {
+              "application/json" : {
+                "Data" : {
+                  "Balance" : [ {
+                    "AccountId" : "22289",
+                    "Amount" : {
+                      "Amount" : "1230.00",
+                      "Currency" : "GBP"
+                    },
+                    "CreditDebitIndicator" : "Credit",
+                    "Type" : "InterimAvailable",
+                    "DateTime" : "2017-04-05T10:43:07+00:00",
+                    "CreditLine" : [ {
+                      "Included" : true,
+                      "Amount" : {
+                        "Amount" : "1000.00",
+                        "Currency" : "GBP"
+                      },
+                      "Type" : "Pre-Agreed"
+                    } ]
+                  } ]
+                },
+                "Links" : {
+                  "Self" : "/accounts/22289/balances/"
+                },
+                "Meta" : {
+                  "TotalPages" : 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{AccountId}/direct-debits" : {
+      "get" : {
+        "tags" : [ "accounts" ],
+        "summary" : "Get Account Direct Debits",
+        "description" : "Get Direct Debits related to an account",
+        "operationId" : "AccountsDirectDebitsByAccountIdGet",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "AccountId",
+          "in" : "path",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "Accept",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-financial-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-last-logged-time",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-ip-address",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-interaction-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "schema" : {
+              "$ref" : "#/definitions/GetAccount31820DirectDebits"
+            },
+            "examples" : {
+              "application/json" : {
+                "Data" : {
+                  "DirectDebit" : [ {
+                    "AccountId" : "31820",
+                    "DirectDebitId" : "DD77",
+                    "MandateIdentification" : "Golfers",
+                    "DirectDebitStatusCode" : "Active",
+                    "Name" : "Golf Club",
+                    "PreviousPaymentDateTime" : "2017-05-06T09:00:00+00:00",
+                    "PreviousPaymentAmount" : {
+                      "Amount" : "22.30",
+                      "Currency" : "GBP"
+                    }
+                  } ]
+                },
+                "Links" : {
+                  "Self" : "/accounts/31820/direct-debits/"
+                },
+                "Meta" : {
+                  "TotalPages" : 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{AccountId}/standing-orders" : {
+      "get" : {
+        "tags" : [ "accounts" ],
+        "summary" : "Get Account Standing Orders",
+        "description" : "Get Standing Orders related to an account",
+        "operationId" : "AccountsStandingOrdersByAccountIdGet",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "AccountId",
+          "in" : "path",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "Accept",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-financial-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-last-logged-time",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-ip-address",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-interaction-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "schema" : {
+              "$ref" : "#/definitions/GetAccount22289StandingOrders"
+            },
+            "examples" : {
+              "application/json" : {
+                "Data" : {
+                  "StandingOrder" : [ {
+                    "AccountId" : "22289",
+                    "StandingOrderId" : "Ben3",
+                    "Frequency" : "EvryWorkgDay",
+                    "Reference" : "Towbar Club 2 - We Love Towbars",
+                    "FirstPaymentDateTime" : "2017-08-12T00:00:00+00:00",
+                    "FirstPaymentAmount" : {
+                      "Amount" : "0.57",
+                      "Currency" : "GBP"
+                    },
+                    "NextPaymentDateTime" : "2017-08-13T00:00:00+00:00",
+                    "NextPaymentAmount" : {
+                      "Amount" : "0.56",
+                      "Currency" : "GBP"
+                    },
+                    "FinalPaymentDateTime" : "2027-08-12T00:00:00+00:00",
+                    "FinalPaymentAmount" : {
+                      "Amount" : "0.56",
+                      "Currency" : "GBP"
+                    },
+                    "CreditorAccount" : {
+                      "SchemeName" : "SortCodeAccountNumber",
+                      "Identification" : "80200112345678",
+                      "Name" : "Mrs Juniper"
+                    }
+                  } ]
+                },
+                "Links" : {
+                  "Self" : "/accounts/22289/standing-orders/"
+                },
+                "Meta" : {
+                  "TotalPages" : 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{AccountId}/product" : {
+      "get" : {
+        "tags" : [ "accounts" ],
+        "summary" : "Get Account Product",
+        "description" : "Get Product related to an account",
+        "operationId" : "AccountsProductByAccountIdGet",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "AccountId",
+          "in" : "path",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "Accept",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-financial-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-last-logged-time",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-ip-address",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-interaction-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "schema" : {
+              "$ref" : "#/definitions/GetAccount22289Product"
+            },
+            "examples" : {
+              "application/json" : {
+                "Data" : {
+                  "Product" : [ {
+                    "AccountId" : "22289",
+                    "ProductIdentifier" : "51B",
+                    "ProductType" : "PCA",
+                    "ProductName" : "321 Product"
+                  } ]
+                },
+                "Links" : {
+                  "Self" : "/accounts/22289/product"
+                },
+                "Meta" : {
+                  "TotalPages" : 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/standing-orders" : {
+      "get" : {
+        "tags" : [ "standing-orders" ],
+        "summary" : "Get Standing Orders",
+        "description" : "Get Standing Orders",
+        "operationId" : "StandingOrdersGet",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Accept",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-financial-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-last-logged-time",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-ip-address",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-interaction-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "schema" : {
+              "$ref" : "#/definitions/GetBulkStandingOrders"
+            },
+            "examples" : {
+              "application/json" : {
+                "Data" : {
+                  "StandingOrder" : [ {
+                    "AccountId" : "22289",
+                    "StandingOrderId" : "Ben3",
+                    "Frequency" : "EvryWorkgDay",
+                    "Reference" : "Towbar Club 2 - We Love Towbars",
+                    "FirstPaymentDateTime" : "2017-08-12T00:00:00+00:00",
+                    "FirstPaymentAmount" : {
+                      "Amount" : "0.57",
+                      "Currency" : "GBP"
+                    },
+                    "NextPaymentDateTime" : "2017-08-13T00:00:00+00:00",
+                    "NextPaymentAmount" : {
+                      "Amount" : "0.56",
+                      "Currency" : "GBP"
+                    },
+                    "FinalPaymentDateTime" : "2027-08-12T00:00:00+00:00",
+                    "FinalPaymentAmount" : {
+                      "Amount" : "0.56",
+                      "Currency" : "GBP"
+                    },
+                    "CreditorAccount" : {
+                      "SchemeName" : "SortCodeAccountNumber",
+                      "Identification" : "80200112345678",
+                      "Name" : "Mrs Juniper"
+                    }
+                  }, {
+                    "AccountId" : "31820",
+                    "StandingOrderId" : "Ben5",
+                    "Frequency" : "WkinMnthDay(2)",
+                    "Reference" : "Golf - We Love Golf",
+                    "FirstPaymentDateTime" : "2017-06-12T00:00:00+00:00",
+                    "FirstPaymentAmount" : {
+                      "Amount" : "23.00",
+                      "Currency" : "GBP"
+                    },
+                    "NextPaymentDateTime" : "2017-07-12T00:00:00+00:00",
+                    "NextPaymentAmount" : {
+                      "Amount" : "23.00",
+                      "Currency" : "GBP"
+                    },
+                    "FinalPaymentDateTime" : "2018-06-12T00:00:00+00:00",
+                    "FinalPaymentAmount" : {
+                      "Amount" : "23.00",
+                      "Currency" : "GBP"
+                    },
+                    "CreditorAccount" : {
+                      "SchemeName" : "SortCodeAccountNumber",
+                      "Identification" : "23605490179017",
+                      "Name" : "Mr Tee"
+                    }
+                  } ]
+                },
+                "Links" : {
+                  "Self" : "/standing-orders/"
+                },
+                "Meta" : {
+                  "TotalPages" : 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/direct-debits" : {
+      "get" : {
+        "tags" : [ "direct-debits" ],
+        "summary" : "Get Direct Debits",
+        "description" : "Get Direct Debits",
+        "operationId" : "DirectDebitsGet",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Accept",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-financial-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-last-logged-time",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-ip-address",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-interaction-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "schema" : {
+              "$ref" : "#/definitions/GetBulkDirectDebits"
+            },
+            "examples" : {
+              "application/json" : {
+                "Data" : {
+                  "DirectDebit" : [ {
+                    "AccountId" : "22289",
+                    "DirectDebitId" : "DD03",
+                    "MandateIdentification" : "Caravanners",
+                    "DirectDebitStatusCode" : "Active",
+                    "Name" : "Towbar Club 3 - We Love Towbars",
+                    "PreviousPaymentDateTime" : "2017-04-05T10:43:07+00:00",
+                    "PreviousPaymentAmount" : {
+                      "Amount" : "0.57",
+                      "Currency" : "GBP"
+                    }
+                  }, {
+                    "AccountId" : "31820",
+                    "DirectDebitId" : "DD77",
+                    "MandateIdentification" : "Golfers",
+                    "DirectDebitStatusCode" : "Active",
+                    "Name" : "Golf Club",
+                    "PreviousPaymentDateTime" : "2017-05-06T09:00:00+00:00",
+                    "PreviousPaymentAmount" : {
+                      "Amount" : "22.30",
+                      "Currency" : "GBP"
+                    }
+                  } ]
+                },
+                "Links" : {
+                  "Self" : "/direct-debits/"
+                },
+                "Meta" : {
+                  "TotalPages" : 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/beneficiaries" : {
+      "get" : {
+        "tags" : [ "beneficiaries" ],
+        "summary" : "Get Beneficiaries",
+        "description" : "Get Beneficiaries",
+        "operationId" : "BeneficiariesGet",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Accept",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-financial-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-last-logged-time",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-ip-address",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-interaction-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "schema" : {
+              "$ref" : "#/definitions/GetBulkBeneficiaries"
+            },
+            "examples" : {
+              "application/json" : {
+                "Data" : {
+                  "Beneficiary" : [ {
+                    "AccountId" : "22289",
+                    "BeneficiaryId" : "Ben1",
+                    "Reference" : "Towbar Club",
+                    "CreditorAccount" : {
+                      "SchemeName" : "SortCodeAccountNumber",
+                      "Identification" : "80200112345678",
+                      "Name" : "Mrs Juniper"
+                    }
+                  }, {
+                    "AccountId" : "31820",
+                    "BeneficiaryId" : "Ben37",
+                    "Reference" : "Golf Club",
+                    "CreditorAccount" : {
+                      "SchemeName" : "SortCodeAccountNumber",
+                      "Identification" : "87562298675421",
+                      "Name" : "Mr Large"
+                    }
+                  } ]
+                },
+                "Links" : {
+                  "Self" : "/beneficiaries/"
+                },
+                "Meta" : {
+                  "TotalPages" : 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions" : {
+      "get" : {
+        "tags" : [ "transactions" ],
+        "summary" : "Get Transactions",
+        "description" : "Get Transactions",
+        "operationId" : "TransactionsGet",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "fromBookingDateTime",
+          "in" : "query",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "toBookingDateTime",
+          "in" : "query",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "Accept",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-financial-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-last-logged-time",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-ip-address",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-interaction-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "schema" : {
+              "$ref" : "#/definitions/GetBulkTransactions"
+            },
+            "examples" : {
+              "application/json" : {
+                "Data" : {
+                  "Transaction" : [ {
+                    "AccountId" : "22289",
+                    "TransactionId" : "123",
+                    "TransactionReference" : "Ref 123",
+                    "Amount" : {
+                      "Amount" : "10.00",
+                      "Currency" : "GBP"
+                    },
+                    "CreditDebitIndicator" : "Credit",
+                    "Status" : "Booked",
+                    "BookingDateTime" : "date",
+                    "ValueDateTime" : "2017-04-05T10:45:22+00:00",
+                    "TransactionInformation" : "Cash from Aubrey",
+                    "BankTransactionCode" : {
+                      "Code" : "ReceivedCreditTransfer",
+                      "SubCode" : "DomesticCreditTransfer"
+                    },
+                    "ProprietaryBankTransactionCode" : {
+                      "Code" : "Transfer",
+                      "Issuer" : "AlphaBank"
+                    },
+                    "Balance" : {
+                      "Amount" : {
+                        "Amount" : "230.00",
+                        "Currency" : "GBP"
+                      },
+                      "CreditDebitIndicator" : "Credit",
+                      "Type" : "InterimBooked"
+                    }
+                  }, {
+                    "AccountId" : "31820",
+                    "TransactionId" : "567",
+                    "TransactionReference" : "Ref 124",
+                    "Amount" : {
+                      "Amount" : "100.00",
+                      "Currency" : "GBP"
+                    },
+                    "CreditDebitIndicator" : "Debit",
+                    "Status" : "Booked",
+                    "BookingDateTime" : "2017-05-02T14:22:09+00:00",
+                    "ValueDateTime" : "2017-05-02T14:22:09+00:00",
+                    "TransactionInformation" : "Paid the gas bill",
+                    "AddressLine" : "Coventry",
+                    "BankTransactionCode" : {
+                      "Code" : "IssuedCreditTransfer",
+                      "SubCode" : "AutomaticTransfer"
+                    },
+                    "ProprietaryBankTransactionCode" : {
+                      "Code" : "DirectDebit",
+                      "Issuer" : "AlphaBank"
+                    },
+                    "Balance" : {
+                      "Amount" : {
+                        "Amount" : "57.36",
+                        "Currency" : "GBP"
+                      },
+                      "CreditDebitIndicator" : "Debit",
+                      "Type" : "InterimBooked"
+                    }
+                  } ]
+                },
+                "Links" : {
+                  "Self" : "/accounts/22289/transactions/"
+                },
+                "Meta" : {
+                  "TotalPages" : 1,
+                  "FirstAvailableDateTime" : "2017-05-03T00:00:00+00:00",
+                  "LastAvailableDateTime" : "2017-12-03T00:00:00+00:00"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/balances" : {
+      "get" : {
+        "tags" : [ "balances" ],
+        "summary" : "Get Balances",
+        "description" : "Get Balances",
+        "operationId" : "BalancesGet",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Accept",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-financial-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-last-logged-time",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-ip-address",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-interaction-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "schema" : {
+              "$ref" : "#/definitions/GetBulkBalances"
+            },
+            "examples" : {
+              "application/json" : {
+                "Data" : {
+                  "Balance" : [ {
+                    "AccountId" : "22289",
+                    "Amount" : {
+                      "Amount" : "1230.00",
+                      "Currency" : "GBP"
+                    },
+                    "CreditDebitIndicator" : "Credit",
+                    "Type" : "InterimAvailable",
+                    "DateTime" : "2017-04-05T10:43:07+00:00",
+                    "CreditLine" : [ {
+                      "Included" : true,
+                      "Amount" : {
+                        "Amount" : "1000.00",
+                        "Currency" : "GBP"
+                      },
+                      "Type" : "Pre-Agreed"
+                    } ]
+                  }, {
+                    "AccountId" : "31820",
+                    "Amount" : {
+                      "Amount" : "57.36",
+                      "Currency" : "GBP"
+                    },
+                    "CreditDebitIndicator" : "Debit",
+                    "Type" : "InterimBooked",
+                    "DateTime" : "2017-05-02T14:22:09+00:00"
+                  } ]
+                },
+                "Links" : {
+                  "Self" : "/balances/"
+                },
+                "Meta" : {
+                  "TotalPages" : 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products" : {
+      "get" : {
+        "tags" : [ "products" ],
+        "summary" : "Get Products",
+        "description" : "Get Products",
+        "operationId" : "ProductsGet",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Accept",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-financial-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-last-logged-time",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-customer-ip-address",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "x-fapi-interaction-id",
+          "in" : "header",
+          "description" : "",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "schema" : {
+              "$ref" : "#/definitions/GetBulkProducts"
+            },
+            "examples" : {
+              "application/json" : {
+                "Data" : {
+                  "Product" : [ {
+                    "AccountId" : "22289",
+                    "ProductIdentifier" : "51B",
+                    "ProductType" : "PCA",
+                    "ProductName" : "321 Product"
+                  }, {
+                    "AccountId" : "31820",
+                    "ProductIdentifier" : "001",
+                    "ProductType" : "BCA",
+                    "ProductName" : "123 Product"
+                  } ]
+                },
+                "Links" : {
+                  "Self" : "/products/"
+                },
+                "Meta" : {
+                  "TotalPages" : 1
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "SimpleCreation" : {
+      "title" : "Simple creation",
+      "required" : [ "Data", "Risk", "Links", "Meta" ],
+      "type" : "object",
+      "properties" : {
+        "Data" : {
+          "$ref" : "#/definitions/Data"
+        },
+        "Risk" : {
+          "description" : "",
+          "type" : "object",
+          "example" : { }
+        },
+        "Links" : {
+          "$ref" : "#/definitions/Links"
+        },
+        "Meta" : {
+          "$ref" : "#/definitions/Meta"
+        }
+      },
+      "example" : {
+        "Data" : {
+          "AccountRequestId" : "88379",
+          "Status" : "AwaitingAuthorisation",
+          "CreationDateTime" : "2017-05-02T00:00:00+00:00",
+          "Permissions" : [ "ReadAccountsDetail", "ReadBalances", "ReadBeneficiariesDetail", "ReadDirectDebits", "ReadProducts", "ReadStandingOrdersDetail", "ReadTransactionsCredits", "ReadTransactionsDebits", "ReadTransactionsDetail" ],
+          "ExpirationDateTime" : "2017-08-02T00:00:00+00:00",
+          "TransactionFromDateTime" : "2017-05-03T00:00:00+00:00",
+          "TransactionToDateTime" : "2017-12-03T00:00:00+00:00"
+        },
+        "Risk" : { },
+        "Links" : {
+          "Self" : "/account-requests/88379"
+        },
+        "Meta" : {
+          "TotalPages" : 1
+        }
+      }
+    },
+    "Data" : {
+      "title" : "Data",
+      "required" : [ "AccountRequestId", "Status", "CreationDateTime", "Permissions", "ExpirationDateTime", "TransactionFromDateTime", "TransactionToDateTime" ],
+      "type" : "object",
+      "properties" : {
+        "AccountRequestId" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "88379"
+        },
+        "Status" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "AwaitingAuthorisation"
+        },
+        "CreationDateTime" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "5/2/2017 12:00:00 AM"
+        },
+        "Permissions" : {
+          "description" : "",
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "example" : [ "ReadAccountsDetail", "ReadBalances", "ReadBeneficiariesDetail", "ReadDirectDebits", "ReadProducts", "ReadStandingOrdersDetail", "ReadTransactionsCredits", "ReadTransactionsDebits", "ReadTransactionsDetail" ]
+        },
+        "ExpirationDateTime" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "8/2/2017 12:00:00 AM"
+        },
+        "TransactionFromDateTime" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "5/3/2017 12:00:00 AM"
+        },
+        "TransactionToDateTime" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "12/3/2017 12:00:00 AM"
+        }
+      },
+      "example" : {
+        "AccountRequestId" : "88379",
+        "Status" : "AwaitingAuthorisation",
+        "CreationDateTime" : "2017-05-02T00:00:00+00:00",
+        "Permissions" : [ "ReadAccountsDetail", "ReadBalances", "ReadBeneficiariesDetail", "ReadDirectDebits", "ReadProducts", "ReadStandingOrdersDetail", "ReadTransactionsCredits", "ReadTransactionsDebits", "ReadTransactionsDetail" ],
+        "ExpirationDateTime" : "2017-08-02T00:00:00+00:00",
+        "TransactionFromDateTime" : "2017-05-03T00:00:00+00:00",
+        "TransactionToDateTime" : "2017-12-03T00:00:00+00:00"
+      }
+    },
+    "Links" : {
+      "title" : "Links",
+      "required" : [ "Self" ],
+      "type" : "object",
+      "properties" : {
+        "Self" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "/account-requests/88379"
+        }
+      },
+      "example" : {
+        "Self" : "/account-requests/88379"
+      }
+    },
+    "Meta" : {
+      "title" : "Meta",
+      "required" : [ "TotalPages" ],
+      "type" : "object",
+      "properties" : {
+        "TotalPages" : {
+          "format" : "int32",
+          "description" : "",
+          "type" : "integer",
+          "example" : 1
+        }
+      },
+      "example" : {
+        "TotalPages" : 1
+      }
+    },
+    "Get88378AccountRequest(afterValidation)" : {
+      "title" : "Get 88378 account request (after validation)",
+      "required" : [ "Data", "Risk", "Links", "Meta" ],
+      "type" : "object",
+      "properties" : {
+        "Data" : {
+          "$ref" : "#/definitions/Data"
+        },
+        "Risk" : {
+          "description" : "",
+          "type" : "object",
+          "example" : { }
+        },
+        "Links" : {
+          "$ref" : "#/definitions/Links"
+        },
+        "Meta" : {
+          "$ref" : "#/definitions/Meta"
+        }
+      },
+      "example" : {
+        "Data" : {
+          "AccountRequestId" : "88378",
+          "Status" : "Authorised",
+          "CreationDateTime" : "2017-05-02T00:00:00+00:00",
+          "Permissions" : [ "ReadAccountsDetail", "ReadBalances", "ReadBeneficiariesDetail", "ReadDirectDebits", "ReadProducts", "ReadStandingOrdersDetail", "ReadTransactionsCredits", "ReadTransactionsDebits", "ReadTransactionsDetail" ],
+          "ExpirationDateTime" : "2017-08-02T00:00:00+00:00",
+          "TransactionFromDateTime" : "2017-05-03T00:00:00+00:00",
+          "TransactionToDateTime" : "2017-12-03T00:00:00+00:00"
+        },
+        "Risk" : { },
+        "Links" : {
+          "Self" : "/account-requests/88379"
+        },
+        "Meta" : {
+          "TotalPages" : 1
+        }
+      }
+    },
+    "GetBulkAccounts" : {
+      "title" : "Get bulk accounts",
+      "required" : [ "Data", "Links", "Meta" ],
+      "type" : "object",
+      "properties" : {
+        "Data" : {
+          "$ref" : "#/definitions/Data9"
+        },
+        "Links" : {
+          "$ref" : "#/definitions/Links"
+        },
+        "Meta" : {
+          "$ref" : "#/definitions/Meta"
+        }
+      }
+    },
+    "Data9" : {
+      "title" : "Data9",
+      "required" : [ "Account" ],
+      "type" : "object",
+      "properties" : {
+        "Account" : {
+          "description" : "",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Account"
+          }
+        }
+      }
+    },
+    "Account" : {
+      "title" : "Account",
+      "required" : [ "AccountId", "Currency", "Nickname", "Account" ],
+      "type" : "object",
+      "properties" : {
+        "AccountId" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "22289"
+        },
+        "Currency" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "GBP"
+        },
+        "Nickname" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Bills"
+        },
+        "Account" : {
+          "$ref" : "#/definitions/Account11"
+        }
+      }
+    },
+    "Account11" : {
+      "title" : "Account11",
+      "required" : [ "SchemeName", "Identification", "Name", "SecondaryIdentification" ],
+      "type" : "object",
+      "properties" : {
+        "SchemeName" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "SortCodeAccountNumber"
+        },
+        "Identification" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "80200110203345"
+        },
+        "Name" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Mr Kevin"
+        },
+        "SecondaryIdentification" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "00021"
+        }
+      },
+      "example" : {
+        "SchemeName" : "SortCodeAccountNumber",
+        "Identification" : "80200110203345",
+        "Name" : "Mr Kevin",
+        "SecondaryIdentification" : "00021"
+      }
+    },
+    "GetAccount31820" : {
+      "title" : "Get account 31820",
+      "required" : [ "Data", "Links", "Meta" ],
+      "type" : "object",
+      "properties" : {
+        "Data" : {
+          "$ref" : "#/definitions/Data15"
+        },
+        "Links" : {
+          "$ref" : "#/definitions/Links"
+        },
+        "Meta" : {
+          "$ref" : "#/definitions/Meta"
+        }
+      },
+      "example" : {
+        "Data" : {
+          "Account" : [ {
+            "AccountId" : "31820",
+            "Currency" : "GBP",
+            "Nickname" : "Household",
+            "Account" : {
+              "SchemeName" : "SortCodeAccountNumber",
+              "Identification" : "80200110203348",
+              "Name" : "Mr Kevin"
+            }
+          } ]
+        },
+        "Links" : {
+          "Self" : "/accounts/31820"
+        },
+        "Meta" : {
+          "TotalPages" : 1
+        }
+      }
+    },
+    "Data15" : {
+      "title" : "Data15",
+      "required" : [ "Account" ],
+      "type" : "object",
+      "properties" : {
+        "Account" : {
+          "description" : "",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Account16"
+          },
+          "example" : [ {
+            "AccountId" : "31820",
+            "Currency" : "GBP",
+            "Nickname" : "Household",
+            "Account" : {
+              "SchemeName" : "SortCodeAccountNumber",
+              "Identification" : "80200110203348",
+              "Name" : "Mr Kevin"
+            }
+          } ]
+        }
+      },
+      "example" : {
+        "Account" : [ {
+          "AccountId" : "31820",
+          "Currency" : "GBP",
+          "Nickname" : "Household",
+          "Account" : {
+            "SchemeName" : "SortCodeAccountNumber",
+            "Identification" : "80200110203348",
+            "Name" : "Mr Kevin"
+          }
+        } ]
+      }
+    },
+    "Account16" : {
+      "title" : "Account16",
+      "required" : [ "AccountId", "Currency", "Nickname", "Account" ],
+      "type" : "object",
+      "properties" : {
+        "AccountId" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "31820"
+        },
+        "Currency" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "GBP"
+        },
+        "Nickname" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Household"
+        },
+        "Account" : {
+          "$ref" : "#/definitions/Account17"
+        }
+      },
+      "example" : {
+        "AccountId" : "31820",
+        "Currency" : "GBP",
+        "Nickname" : "Household",
+        "Account" : {
+          "SchemeName" : "SortCodeAccountNumber",
+          "Identification" : "80200110203348",
+          "Name" : "Mr Kevin"
+        }
+      }
+    },
+    "Account17" : {
+      "title" : "Account17",
+      "required" : [ "SchemeName", "Identification", "Name" ],
+      "type" : "object",
+      "properties" : {
+        "SchemeName" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "SortCodeAccountNumber"
+        },
+        "Identification" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "80200110203348"
+        },
+        "Name" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Mr Kevin"
+        }
+      },
+      "example" : {
+        "SchemeName" : "SortCodeAccountNumber",
+        "Identification" : "80200110203348",
+        "Name" : "Mr Kevin"
+      }
+    },
+    "GetAccount31820Transactions" : {
+      "title" : "Get account 31820 transactions",
+      "required" : [ "Data", "Links", "Meta" ],
+      "type" : "object",
+      "properties" : {
+        "Data" : {
+          "$ref" : "#/definitions/Data21"
+        },
+        "Links" : {
+          "$ref" : "#/definitions/Links"
+        },
+        "Meta" : {
+          "$ref" : "#/definitions/Meta29"
+        }
+      },
+      "example" : {
+        "Data" : {
+          "Transaction" : [ {
+            "AccountId" : "31820",
+            "TransactionId" : "567",
+            "TransactionReference" : "Ref 124",
+            "Amount" : {
+              "Amount" : "100.00",
+              "Currency" : "GBP"
+            },
+            "CreditDebitIndicator" : "Debit",
+            "Status" : "Booked",
+            "BookingDateTime" : "2017-05-02T14:22:09+00:00",
+            "ValueDateTime" : "2017-05-02T14:22:09+00:00",
+            "TransactionInformation" : "Paid the gas bill",
+            "AddressLine" : "Coventry",
+            "BankTransactionCode" : {
+              "Code" : "IssuedCreditTransfer",
+              "SubCode" : "AutomaticTransfer"
+            },
+            "ProprietaryBankTransactionCode" : {
+              "Code" : "DirectDebit",
+              "Issuer" : "AlphaBank"
+            },
+            "Balance" : {
+              "Amount" : {
+                "Amount" : "57.36",
+                "Currency" : "GBP"
+              },
+              "CreditDebitIndicator" : "Debit",
+              "Type" : "InterimBooked"
+            }
+          } ]
+        },
+        "Links" : {
+          "Self" : "/accounts/31820/transactions/"
+        },
+        "Meta" : {
+          "TotalPages" : 1,
+          "FirstAvailableDateTime" : "2017-05-03T00:00:00+00:00",
+          "LastAvailableDateTime" : "2017-12-03T00:00:00+00:00"
+        }
+      }
+    },
+    "Data21" : {
+      "title" : "Data21",
+      "required" : [ "Transaction" ],
+      "type" : "object",
+      "properties" : {
+        "Transaction" : {
+          "description" : "",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Transaction"
+          },
+          "example" : [ {
+            "AccountId" : "31820",
+            "TransactionId" : "567",
+            "TransactionReference" : "Ref 124",
+            "Amount" : {
+              "Amount" : "100.00",
+              "Currency" : "GBP"
+            },
+            "CreditDebitIndicator" : "Debit",
+            "Status" : "Booked",
+            "BookingDateTime" : "2017-05-02T14:22:09+00:00",
+            "ValueDateTime" : "2017-05-02T14:22:09+00:00",
+            "TransactionInformation" : "Paid the gas bill",
+            "AddressLine" : "Coventry",
+            "BankTransactionCode" : {
+              "Code" : "IssuedCreditTransfer",
+              "SubCode" : "AutomaticTransfer"
+            },
+            "ProprietaryBankTransactionCode" : {
+              "Code" : "DirectDebit",
+              "Issuer" : "AlphaBank"
+            },
+            "Balance" : {
+              "Amount" : {
+                "Amount" : "57.36",
+                "Currency" : "GBP"
+              },
+              "CreditDebitIndicator" : "Debit",
+              "Type" : "InterimBooked"
+            }
+          } ]
+        }
+      },
+      "example" : {
+        "Transaction" : [ {
+          "AccountId" : "31820",
+          "TransactionId" : "567",
+          "TransactionReference" : "Ref 124",
+          "Amount" : {
+            "Amount" : "100.00",
+            "Currency" : "GBP"
+          },
+          "CreditDebitIndicator" : "Debit",
+          "Status" : "Booked",
+          "BookingDateTime" : "2017-05-02T14:22:09+00:00",
+          "ValueDateTime" : "2017-05-02T14:22:09+00:00",
+          "TransactionInformation" : "Paid the gas bill",
+          "AddressLine" : "Coventry",
+          "BankTransactionCode" : {
+            "Code" : "IssuedCreditTransfer",
+            "SubCode" : "AutomaticTransfer"
+          },
+          "ProprietaryBankTransactionCode" : {
+            "Code" : "DirectDebit",
+            "Issuer" : "AlphaBank"
+          },
+          "Balance" : {
+            "Amount" : {
+              "Amount" : "57.36",
+              "Currency" : "GBP"
+            },
+            "CreditDebitIndicator" : "Debit",
+            "Type" : "InterimBooked"
+          }
+        } ]
+      }
+    },
+    "Transaction" : {
+      "title" : "Transaction",
+      "required" : [ "AccountId", "TransactionId", "TransactionReference", "Amount", "CreditDebitIndicator", "Status", "BookingDateTime", "ValueDateTime", "TransactionInformation", "AddressLine", "BankTransactionCode", "ProprietaryBankTransactionCode", "Balance" ],
+      "type" : "object",
+      "properties" : {
+        "AccountId" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "31820"
+        },
+        "TransactionId" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "567"
+        },
+        "TransactionReference" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Ref 124"
+        },
+        "Amount" : {
+          "$ref" : "#/definitions/Amount"
+        },
+        "CreditDebitIndicator" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Debit"
+        },
+        "Status" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Booked"
+        },
+        "BookingDateTime" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "5/2/2017 2:22:09 PM"
+        },
+        "ValueDateTime" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "5/2/2017 2:22:09 PM"
+        },
+        "TransactionInformation" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Paid the gas bill"
+        },
+        "AddressLine" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Coventry"
+        },
+        "BankTransactionCode" : {
+          "$ref" : "#/definitions/BankTransactionCode"
+        },
+        "ProprietaryBankTransactionCode" : {
+          "$ref" : "#/definitions/ProprietaryBankTransactionCode"
+        },
+        "Balance" : {
+          "$ref" : "#/definitions/Balance"
+        }
+      },
+      "example" : {
+        "AccountId" : "31820",
+        "TransactionId" : "567",
+        "TransactionReference" : "Ref 124",
+        "Amount" : {
+          "Amount" : "100.00",
+          "Currency" : "GBP"
+        },
+        "CreditDebitIndicator" : "Debit",
+        "Status" : "Booked",
+        "BookingDateTime" : "2017-05-02T14:22:09+00:00",
+        "ValueDateTime" : "2017-05-02T14:22:09+00:00",
+        "TransactionInformation" : "Paid the gas bill",
+        "AddressLine" : "Coventry",
+        "BankTransactionCode" : {
+          "Code" : "IssuedCreditTransfer",
+          "SubCode" : "AutomaticTransfer"
+        },
+        "ProprietaryBankTransactionCode" : {
+          "Code" : "DirectDebit",
+          "Issuer" : "AlphaBank"
+        },
+        "Balance" : {
+          "Amount" : {
+            "Amount" : "57.36",
+            "Currency" : "GBP"
+          },
+          "CreditDebitIndicator" : "Debit",
+          "Type" : "InterimBooked"
+        }
+      }
+    },
+    "Amount" : {
+      "title" : "Amount",
+      "required" : [ "Amount", "Currency" ],
+      "type" : "object",
+      "properties" : {
+        "Amount" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "100.00"
+        },
+        "Currency" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "GBP"
+        }
+      },
+      "example" : {
+        "Amount" : "100.00",
+        "Currency" : "GBP"
+      }
+    },
+    "BankTransactionCode" : {
+      "title" : "BankTransactionCode",
+      "required" : [ "Code", "SubCode" ],
+      "type" : "object",
+      "properties" : {
+        "Code" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "IssuedCreditTransfer"
+        },
+        "SubCode" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "AutomaticTransfer"
+        }
+      },
+      "example" : {
+        "Code" : "IssuedCreditTransfer",
+        "SubCode" : "AutomaticTransfer"
+      }
+    },
+    "ProprietaryBankTransactionCode" : {
+      "title" : "ProprietaryBankTransactionCode",
+      "required" : [ "Code", "Issuer" ],
+      "type" : "object",
+      "properties" : {
+        "Code" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "DirectDebit"
+        },
+        "Issuer" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "AlphaBank"
+        }
+      },
+      "example" : {
+        "Code" : "DirectDebit",
+        "Issuer" : "AlphaBank"
+      }
+    },
+    "Balance" : {
+      "title" : "Balance",
+      "required" : [ "Amount", "CreditDebitIndicator", "Type" ],
+      "type" : "object",
+      "properties" : {
+        "Amount" : {
+          "$ref" : "#/definitions/Amount"
+        },
+        "CreditDebitIndicator" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Debit"
+        },
+        "Type" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "InterimBooked"
+        }
+      },
+      "example" : {
+        "Amount" : {
+          "Amount" : "57.36",
+          "Currency" : "GBP"
+        },
+        "CreditDebitIndicator" : "Debit",
+        "Type" : "InterimBooked"
+      }
+    },
+    "Meta29" : {
+      "title" : "Meta29",
+      "required" : [ "TotalPages", "FirstAvailableDateTime", "LastAvailableDateTime" ],
+      "type" : "object",
+      "properties" : {
+        "TotalPages" : {
+          "format" : "int32",
+          "description" : "",
+          "type" : "integer",
+          "example" : 1
+        },
+        "FirstAvailableDateTime" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "5/3/2017 12:00:00 AM"
+        },
+        "LastAvailableDateTime" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "12/3/2017 12:00:00 AM"
+        }
+      },
+      "example" : {
+        "TotalPages" : 1,
+        "FirstAvailableDateTime" : "2017-05-03T00:00:00+00:00",
+        "LastAvailableDateTime" : "2017-12-03T00:00:00+00:00"
+      }
+    },
+    "GetAccount31820Beneficiaries" : {
+      "title" : "Get account 31820 beneficiaries",
+      "required" : [ "Data", "Links", "Meta" ],
+      "type" : "object",
+      "properties" : {
+        "Data" : {
+          "$ref" : "#/definitions/Data31"
+        },
+        "Links" : {
+          "$ref" : "#/definitions/Links"
+        },
+        "Meta" : {
+          "$ref" : "#/definitions/Meta"
+        }
+      },
+      "example" : {
+        "Data" : {
+          "Beneficiary" : [ {
+            "AccountId" : "31820",
+            "BeneficiaryId" : "Ben37",
+            "Reference" : "Golf Club",
+            "CreditorAccount" : {
+              "SchemeName" : "SortCodeAccountNumber",
+              "Identification" : "87562298675421",
+              "Name" : "Mr Large"
+            }
+          } ]
+        },
+        "Links" : {
+          "Self" : "/accounts/31820/beneficiaries/"
+        },
+        "Meta" : {
+          "TotalPages" : 1
+        }
+      }
+    },
+    "Data31" : {
+      "title" : "Data31",
+      "required" : [ "Beneficiary" ],
+      "type" : "object",
+      "properties" : {
+        "Beneficiary" : {
+          "description" : "",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Beneficiary"
+          },
+          "example" : [ {
+            "AccountId" : "31820",
+            "BeneficiaryId" : "Ben37",
+            "Reference" : "Golf Club",
+            "CreditorAccount" : {
+              "SchemeName" : "SortCodeAccountNumber",
+              "Identification" : "87562298675421",
+              "Name" : "Mr Large"
+            }
+          } ]
+        }
+      },
+      "example" : {
+        "Beneficiary" : [ {
+          "AccountId" : "31820",
+          "BeneficiaryId" : "Ben37",
+          "Reference" : "Golf Club",
+          "CreditorAccount" : {
+            "SchemeName" : "SortCodeAccountNumber",
+            "Identification" : "87562298675421",
+            "Name" : "Mr Large"
+          }
+        } ]
+      }
+    },
+    "Beneficiary" : {
+      "title" : "Beneficiary",
+      "required" : [ "AccountId", "BeneficiaryId", "Reference", "CreditorAccount" ],
+      "type" : "object",
+      "properties" : {
+        "AccountId" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "31820"
+        },
+        "BeneficiaryId" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Ben37"
+        },
+        "Reference" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Golf Club"
+        },
+        "CreditorAccount" : {
+          "$ref" : "#/definitions/CreditorAccount"
+        }
+      },
+      "example" : {
+        "AccountId" : "31820",
+        "BeneficiaryId" : "Ben37",
+        "Reference" : "Golf Club",
+        "CreditorAccount" : {
+          "SchemeName" : "SortCodeAccountNumber",
+          "Identification" : "87562298675421",
+          "Name" : "Mr Large"
+        }
+      }
+    },
+    "CreditorAccount" : {
+      "title" : "CreditorAccount",
+      "required" : [ "SchemeName", "Identification", "Name" ],
+      "type" : "object",
+      "properties" : {
+        "SchemeName" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "SortCodeAccountNumber"
+        },
+        "Identification" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "87562298675421"
+        },
+        "Name" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Mr Large"
+        }
+      },
+      "example" : {
+        "SchemeName" : "SortCodeAccountNumber",
+        "Identification" : "87562298675421",
+        "Name" : "Mr Large"
+      }
+    },
+    "GetAccount22289Balances" : {
+      "title" : "Get account 22289 balances",
+      "required" : [ "Data", "Links", "Meta" ],
+      "type" : "object",
+      "properties" : {
+        "Data" : {
+          "$ref" : "#/definitions/Data37"
+        },
+        "Links" : {
+          "$ref" : "#/definitions/Links"
+        },
+        "Meta" : {
+          "$ref" : "#/definitions/Meta"
+        }
+      },
+      "example" : {
+        "Data" : {
+          "Balance" : [ {
+            "AccountId" : "22289",
+            "Amount" : {
+              "Amount" : "1230.00",
+              "Currency" : "GBP"
+            },
+            "CreditDebitIndicator" : "Credit",
+            "Type" : "InterimAvailable",
+            "DateTime" : "2017-04-05T10:43:07+00:00",
+            "CreditLine" : [ {
+              "Included" : true,
+              "Amount" : {
+                "Amount" : "1000.00",
+                "Currency" : "GBP"
+              },
+              "Type" : "Pre-Agreed"
+            } ]
+          } ]
+        },
+        "Links" : {
+          "Self" : "/accounts/22289/balances/"
+        },
+        "Meta" : {
+          "TotalPages" : 1
+        }
+      }
+    },
+    "Data37" : {
+      "title" : "Data37",
+      "required" : [ "Balance" ],
+      "type" : "object",
+      "properties" : {
+        "Balance" : {
+          "description" : "",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Balance38"
+          },
+          "example" : [ {
+            "AccountId" : "22289",
+            "Amount" : {
+              "Amount" : "1230.00",
+              "Currency" : "GBP"
+            },
+            "CreditDebitIndicator" : "Credit",
+            "Type" : "InterimAvailable",
+            "DateTime" : "2017-04-05T10:43:07+00:00",
+            "CreditLine" : [ {
+              "Included" : true,
+              "Amount" : {
+                "Amount" : "1000.00",
+                "Currency" : "GBP"
+              },
+              "Type" : "Pre-Agreed"
+            } ]
+          } ]
+        }
+      },
+      "example" : {
+        "Balance" : [ {
+          "AccountId" : "22289",
+          "Amount" : {
+            "Amount" : "1230.00",
+            "Currency" : "GBP"
+          },
+          "CreditDebitIndicator" : "Credit",
+          "Type" : "InterimAvailable",
+          "DateTime" : "2017-04-05T10:43:07+00:00",
+          "CreditLine" : [ {
+            "Included" : true,
+            "Amount" : {
+              "Amount" : "1000.00",
+              "Currency" : "GBP"
+            },
+            "Type" : "Pre-Agreed"
+          } ]
+        } ]
+      }
+    },
+    "Balance38" : {
+      "title" : "Balance38",
+      "required" : [ "AccountId", "Amount", "CreditDebitIndicator", "Type", "DateTime", "CreditLine" ],
+      "type" : "object",
+      "properties" : {
+        "AccountId" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "22289"
+        },
+        "Amount" : {
+          "$ref" : "#/definitions/Amount"
+        },
+        "CreditDebitIndicator" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Credit"
+        },
+        "Type" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "InterimAvailable"
+        },
+        "DateTime" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "4/5/2017 10:43:07 AM"
+        },
+        "CreditLine" : {
+          "description" : "",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CreditLine"
+          },
+          "example" : [ {
+            "Included" : true,
+            "Amount" : {
+              "Amount" : "1000.00",
+              "Currency" : "GBP"
+            },
+            "Type" : "Pre-Agreed"
+          } ]
+        }
+      },
+      "example" : {
+        "AccountId" : "22289",
+        "Amount" : {
+          "Amount" : "1230.00",
+          "Currency" : "GBP"
+        },
+        "CreditDebitIndicator" : "Credit",
+        "Type" : "InterimAvailable",
+        "DateTime" : "2017-04-05T10:43:07+00:00",
+        "CreditLine" : [ {
+          "Included" : true,
+          "Amount" : {
+            "Amount" : "1000.00",
+            "Currency" : "GBP"
+          },
+          "Type" : "Pre-Agreed"
+        } ]
+      }
+    },
+    "CreditLine" : {
+      "title" : "CreditLine",
+      "required" : [ "Included", "Amount", "Type" ],
+      "type" : "object",
+      "properties" : {
+        "Included" : {
+          "description" : "",
+          "type" : "boolean",
+          "example" : true
+        },
+        "Amount" : {
+          "$ref" : "#/definitions/Amount"
+        },
+        "Type" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Pre-Agreed"
+        }
+      },
+      "example" : {
+        "Included" : true,
+        "Amount" : {
+          "Amount" : "1000.00",
+          "Currency" : "GBP"
+        },
+        "Type" : "Pre-Agreed"
+      }
+    },
+    "GetAccount31820DirectDebits" : {
+      "title" : "Get account 31820 direct debits",
+      "required" : [ "Data", "Links", "Meta" ],
+      "type" : "object",
+      "properties" : {
+        "Data" : {
+          "$ref" : "#/definitions/Data45"
+        },
+        "Links" : {
+          "$ref" : "#/definitions/Links"
+        },
+        "Meta" : {
+          "$ref" : "#/definitions/Meta"
+        }
+      },
+      "example" : {
+        "Data" : {
+          "DirectDebit" : [ {
+            "AccountId" : "31820",
+            "DirectDebitId" : "DD77",
+            "MandateIdentification" : "Golfers",
+            "DirectDebitStatusCode" : "Active",
+            "Name" : "Golf Club",
+            "PreviousPaymentDateTime" : "2017-05-06T09:00:00+00:00",
+            "PreviousPaymentAmount" : {
+              "Amount" : "22.30",
+              "Currency" : "GBP"
+            }
+          } ]
+        },
+        "Links" : {
+          "Self" : "/accounts/31820/direct-debits/"
+        },
+        "Meta" : {
+          "TotalPages" : 1
+        }
+      }
+    },
+    "Data45" : {
+      "title" : "Data45",
+      "required" : [ "DirectDebit" ],
+      "type" : "object",
+      "properties" : {
+        "DirectDebit" : {
+          "description" : "",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/DirectDebit"
+          },
+          "example" : [ {
+            "AccountId" : "31820",
+            "DirectDebitId" : "DD77",
+            "MandateIdentification" : "Golfers",
+            "DirectDebitStatusCode" : "Active",
+            "Name" : "Golf Club",
+            "PreviousPaymentDateTime" : "2017-05-06T09:00:00+00:00",
+            "PreviousPaymentAmount" : {
+              "Amount" : "22.30",
+              "Currency" : "GBP"
+            }
+          } ]
+        }
+      },
+      "example" : {
+        "DirectDebit" : [ {
+          "AccountId" : "31820",
+          "DirectDebitId" : "DD77",
+          "MandateIdentification" : "Golfers",
+          "DirectDebitStatusCode" : "Active",
+          "Name" : "Golf Club",
+          "PreviousPaymentDateTime" : "2017-05-06T09:00:00+00:00",
+          "PreviousPaymentAmount" : {
+            "Amount" : "22.30",
+            "Currency" : "GBP"
+          }
+        } ]
+      }
+    },
+    "DirectDebit" : {
+      "title" : "DirectDebit",
+      "required" : [ "AccountId", "DirectDebitId", "MandateIdentification", "DirectDebitStatusCode", "Name", "PreviousPaymentDateTime", "PreviousPaymentAmount" ],
+      "type" : "object",
+      "properties" : {
+        "AccountId" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "31820"
+        },
+        "DirectDebitId" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "DD77"
+        },
+        "MandateIdentification" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Golfers"
+        },
+        "DirectDebitStatusCode" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Active"
+        },
+        "Name" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Golf Club"
+        },
+        "PreviousPaymentDateTime" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "5/6/2017 9:00:00 AM"
+        },
+        "PreviousPaymentAmount" : {
+          "$ref" : "#/definitions/PreviousPaymentAmount"
+        }
+      },
+      "example" : {
+        "AccountId" : "31820",
+        "DirectDebitId" : "DD77",
+        "MandateIdentification" : "Golfers",
+        "DirectDebitStatusCode" : "Active",
+        "Name" : "Golf Club",
+        "PreviousPaymentDateTime" : "2017-05-06T09:00:00+00:00",
+        "PreviousPaymentAmount" : {
+          "Amount" : "22.30",
+          "Currency" : "GBP"
+        }
+      }
+    },
+    "PreviousPaymentAmount" : {
+      "title" : "PreviousPaymentAmount",
+      "required" : [ "Amount", "Currency" ],
+      "type" : "object",
+      "properties" : {
+        "Amount" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "22.30"
+        },
+        "Currency" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "GBP"
+        }
+      },
+      "example" : {
+        "Amount" : "22.30",
+        "Currency" : "GBP"
+      }
+    },
+    "GetAccount22289StandingOrders" : {
+      "title" : "Get account 22289 standing orders",
+      "required" : [ "Data", "Links", "Meta" ],
+      "type" : "object",
+      "properties" : {
+        "Data" : {
+          "$ref" : "#/definitions/Data51"
+        },
+        "Links" : {
+          "$ref" : "#/definitions/Links"
+        },
+        "Meta" : {
+          "$ref" : "#/definitions/Meta"
+        }
+      },
+      "example" : {
+        "Data" : {
+          "StandingOrder" : [ {
+            "AccountId" : "22289",
+            "StandingOrderId" : "Ben3",
+            "Frequency" : "EvryWorkgDay",
+            "Reference" : "Towbar Club 2 - We Love Towbars",
+            "FirstPaymentDateTime" : "2017-08-12T00:00:00+00:00",
+            "FirstPaymentAmount" : {
+              "Amount" : "0.57",
+              "Currency" : "GBP"
+            },
+            "NextPaymentDateTime" : "2017-08-13T00:00:00+00:00",
+            "NextPaymentAmount" : {
+              "Amount" : "0.56",
+              "Currency" : "GBP"
+            },
+            "FinalPaymentDateTime" : "2027-08-12T00:00:00+00:00",
+            "FinalPaymentAmount" : {
+              "Amount" : "0.56",
+              "Currency" : "GBP"
+            },
+            "CreditorAccount" : {
+              "SchemeName" : "SortCodeAccountNumber",
+              "Identification" : "80200112345678",
+              "Name" : "Mrs Juniper"
+            }
+          } ]
+        },
+        "Links" : {
+          "Self" : "/accounts/22289/standing-orders/"
+        },
+        "Meta" : {
+          "TotalPages" : 1
+        }
+      }
+    },
+    "Data51" : {
+      "title" : "Data51",
+      "required" : [ "StandingOrder" ],
+      "type" : "object",
+      "properties" : {
+        "StandingOrder" : {
+          "description" : "",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/StandingOrder"
+          },
+          "example" : [ {
+            "AccountId" : "22289",
+            "StandingOrderId" : "Ben3",
+            "Frequency" : "EvryWorkgDay",
+            "Reference" : "Towbar Club 2 - We Love Towbars",
+            "FirstPaymentDateTime" : "2017-08-12T00:00:00+00:00",
+            "FirstPaymentAmount" : {
+              "Amount" : "0.57",
+              "Currency" : "GBP"
+            },
+            "NextPaymentDateTime" : "2017-08-13T00:00:00+00:00",
+            "NextPaymentAmount" : {
+              "Amount" : "0.56",
+              "Currency" : "GBP"
+            },
+            "FinalPaymentDateTime" : "2027-08-12T00:00:00+00:00",
+            "FinalPaymentAmount" : {
+              "Amount" : "0.56",
+              "Currency" : "GBP"
+            },
+            "CreditorAccount" : {
+              "SchemeName" : "SortCodeAccountNumber",
+              "Identification" : "80200112345678",
+              "Name" : "Mrs Juniper"
+            }
+          } ]
+        }
+      },
+      "example" : {
+        "StandingOrder" : [ {
+          "AccountId" : "22289",
+          "StandingOrderId" : "Ben3",
+          "Frequency" : "EvryWorkgDay",
+          "Reference" : "Towbar Club 2 - We Love Towbars",
+          "FirstPaymentDateTime" : "2017-08-12T00:00:00+00:00",
+          "FirstPaymentAmount" : {
+            "Amount" : "0.57",
+            "Currency" : "GBP"
+          },
+          "NextPaymentDateTime" : "2017-08-13T00:00:00+00:00",
+          "NextPaymentAmount" : {
+            "Amount" : "0.56",
+            "Currency" : "GBP"
+          },
+          "FinalPaymentDateTime" : "2027-08-12T00:00:00+00:00",
+          "FinalPaymentAmount" : {
+            "Amount" : "0.56",
+            "Currency" : "GBP"
+          },
+          "CreditorAccount" : {
+            "SchemeName" : "SortCodeAccountNumber",
+            "Identification" : "80200112345678",
+            "Name" : "Mrs Juniper"
+          }
+        } ]
+      }
+    },
+    "StandingOrder" : {
+      "title" : "StandingOrder",
+      "required" : [ "AccountId", "StandingOrderId", "Frequency", "Reference", "FirstPaymentDateTime", "FirstPaymentAmount", "NextPaymentDateTime", "NextPaymentAmount", "FinalPaymentDateTime", "FinalPaymentAmount", "CreditorAccount" ],
+      "type" : "object",
+      "properties" : {
+        "AccountId" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "22289"
+        },
+        "StandingOrderId" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Ben3"
+        },
+        "Frequency" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "EvryWorkgDay"
+        },
+        "Reference" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Towbar Club 2 - We Love Towbars"
+        },
+        "FirstPaymentDateTime" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "8/12/2017 12:00:00 AM"
+        },
+        "FirstPaymentAmount" : {
+          "$ref" : "#/definitions/FirstPaymentAmount"
+        },
+        "NextPaymentDateTime" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "8/13/2017 12:00:00 AM"
+        },
+        "NextPaymentAmount" : {
+          "$ref" : "#/definitions/NextPaymentAmount"
+        },
+        "FinalPaymentDateTime" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "8/12/2027 12:00:00 AM"
+        },
+        "FinalPaymentAmount" : {
+          "$ref" : "#/definitions/FinalPaymentAmount"
+        },
+        "CreditorAccount" : {
+          "$ref" : "#/definitions/CreditorAccount"
+        }
+      },
+      "example" : {
+        "AccountId" : "22289",
+        "StandingOrderId" : "Ben3",
+        "Frequency" : "EvryWorkgDay",
+        "Reference" : "Towbar Club 2 - We Love Towbars",
+        "FirstPaymentDateTime" : "2017-08-12T00:00:00+00:00",
+        "FirstPaymentAmount" : {
+          "Amount" : "0.57",
+          "Currency" : "GBP"
+        },
+        "NextPaymentDateTime" : "2017-08-13T00:00:00+00:00",
+        "NextPaymentAmount" : {
+          "Amount" : "0.56",
+          "Currency" : "GBP"
+        },
+        "FinalPaymentDateTime" : "2027-08-12T00:00:00+00:00",
+        "FinalPaymentAmount" : {
+          "Amount" : "0.56",
+          "Currency" : "GBP"
+        },
+        "CreditorAccount" : {
+          "SchemeName" : "SortCodeAccountNumber",
+          "Identification" : "80200112345678",
+          "Name" : "Mrs Juniper"
+        }
+      }
+    },
+    "FirstPaymentAmount" : {
+      "title" : "FirstPaymentAmount",
+      "required" : [ "Amount", "Currency" ],
+      "type" : "object",
+      "properties" : {
+        "Amount" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "0.57"
+        },
+        "Currency" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "GBP"
+        }
+      },
+      "example" : {
+        "Amount" : "0.57",
+        "Currency" : "GBP"
+      }
+    },
+    "NextPaymentAmount" : {
+      "title" : "NextPaymentAmount",
+      "required" : [ "Amount", "Currency" ],
+      "type" : "object",
+      "properties" : {
+        "Amount" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "0.56"
+        },
+        "Currency" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "GBP"
+        }
+      },
+      "example" : {
+        "Amount" : "0.56",
+        "Currency" : "GBP"
+      }
+    },
+    "FinalPaymentAmount" : {
+      "title" : "FinalPaymentAmount",
+      "required" : [ "Amount", "Currency" ],
+      "type" : "object",
+      "properties" : {
+        "Amount" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "0.56"
+        },
+        "Currency" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "GBP"
+        }
+      },
+      "example" : {
+        "Amount" : "0.56",
+        "Currency" : "GBP"
+      }
+    },
+    "GetAccount22289Product" : {
+      "title" : "Get account 22289 product",
+      "required" : [ "Data", "Links", "Meta" ],
+      "type" : "object",
+      "properties" : {
+        "Data" : {
+          "$ref" : "#/definitions/Data60"
+        },
+        "Links" : {
+          "$ref" : "#/definitions/Links"
+        },
+        "Meta" : {
+          "$ref" : "#/definitions/Meta"
+        }
+      },
+      "example" : {
+        "Data" : {
+          "Product" : [ {
+            "AccountId" : "22289",
+            "ProductIdentifier" : "51B",
+            "ProductType" : "PCA",
+            "ProductName" : "321 Product"
+          } ]
+        },
+        "Links" : {
+          "Self" : "/accounts/22289/product"
+        },
+        "Meta" : {
+          "TotalPages" : 1
+        }
+      }
+    },
+    "Data60" : {
+      "title" : "Data60",
+      "required" : [ "Product" ],
+      "type" : "object",
+      "properties" : {
+        "Product" : {
+          "description" : "",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Product"
+          },
+          "example" : [ {
+            "AccountId" : "22289",
+            "ProductIdentifier" : "51B",
+            "ProductType" : "PCA",
+            "ProductName" : "321 Product"
+          } ]
+        }
+      },
+      "example" : {
+        "Product" : [ {
+          "AccountId" : "22289",
+          "ProductIdentifier" : "51B",
+          "ProductType" : "PCA",
+          "ProductName" : "321 Product"
+        } ]
+      }
+    },
+    "Product" : {
+      "title" : "Product",
+      "required" : [ "AccountId", "ProductIdentifier", "ProductType", "ProductName" ],
+      "type" : "object",
+      "properties" : {
+        "AccountId" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "22289"
+        },
+        "ProductIdentifier" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "51B"
+        },
+        "ProductType" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "PCA"
+        },
+        "ProductName" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "321 Product"
+        }
+      },
+      "example" : {
+        "AccountId" : "22289",
+        "ProductIdentifier" : "51B",
+        "ProductType" : "PCA",
+        "ProductName" : "321 Product"
+      }
+    },
+    "GetBulkStandingOrders" : {
+      "title" : "Get bulk standing orders",
+      "required" : [ "Data", "Links", "Meta" ],
+      "type" : "object",
+      "properties" : {
+        "Data" : {
+          "$ref" : "#/definitions/Data51"
+        },
+        "Links" : {
+          "$ref" : "#/definitions/Links"
+        },
+        "Meta" : {
+          "$ref" : "#/definitions/Meta"
+        }
+      },
+      "example" : {
+        "Data" : {
+          "StandingOrder" : [ {
+            "AccountId" : "22289",
+            "StandingOrderId" : "Ben3",
+            "Frequency" : "EvryWorkgDay",
+            "Reference" : "Towbar Club 2 - We Love Towbars",
+            "FirstPaymentDateTime" : "2017-08-12T00:00:00+00:00",
+            "FirstPaymentAmount" : {
+              "Amount" : "0.57",
+              "Currency" : "GBP"
+            },
+            "NextPaymentDateTime" : "2017-08-13T00:00:00+00:00",
+            "NextPaymentAmount" : {
+              "Amount" : "0.56",
+              "Currency" : "GBP"
+            },
+            "FinalPaymentDateTime" : "2027-08-12T00:00:00+00:00",
+            "FinalPaymentAmount" : {
+              "Amount" : "0.56",
+              "Currency" : "GBP"
+            },
+            "CreditorAccount" : {
+              "SchemeName" : "SortCodeAccountNumber",
+              "Identification" : "80200112345678",
+              "Name" : "Mrs Juniper"
+            }
+          }, {
+            "AccountId" : "31820",
+            "StandingOrderId" : "Ben5",
+            "Frequency" : "WkinMnthDay(2)",
+            "Reference" : "Golf - We Love Golf",
+            "FirstPaymentDateTime" : "2017-06-12T00:00:00+00:00",
+            "FirstPaymentAmount" : {
+              "Amount" : "23.00",
+              "Currency" : "GBP"
+            },
+            "NextPaymentDateTime" : "2017-07-12T00:00:00+00:00",
+            "NextPaymentAmount" : {
+              "Amount" : "23.00",
+              "Currency" : "GBP"
+            },
+            "FinalPaymentDateTime" : "2018-06-12T00:00:00+00:00",
+            "FinalPaymentAmount" : {
+              "Amount" : "23.00",
+              "Currency" : "GBP"
+            },
+            "CreditorAccount" : {
+              "SchemeName" : "SortCodeAccountNumber",
+              "Identification" : "23605490179017",
+              "Name" : "Mr Tee"
+            }
+          } ]
+        },
+        "Links" : {
+          "Self" : "/standing-orders/"
+        },
+        "Meta" : {
+          "TotalPages" : 1
+        }
+      }
+    },
+    "GetBulkDirectDebits" : {
+      "title" : "Get bulk direct debits",
+      "required" : [ "Data", "Links", "Meta" ],
+      "type" : "object",
+      "properties" : {
+        "Data" : {
+          "$ref" : "#/definitions/Data45"
+        },
+        "Links" : {
+          "$ref" : "#/definitions/Links"
+        },
+        "Meta" : {
+          "$ref" : "#/definitions/Meta"
+        }
+      },
+      "example" : {
+        "Data" : {
+          "DirectDebit" : [ {
+            "AccountId" : "22289",
+            "DirectDebitId" : "DD03",
+            "MandateIdentification" : "Caravanners",
+            "DirectDebitStatusCode" : "Active",
+            "Name" : "Towbar Club 3 - We Love Towbars",
+            "PreviousPaymentDateTime" : "2017-04-05T10:43:07+00:00",
+            "PreviousPaymentAmount" : {
+              "Amount" : "0.57",
+              "Currency" : "GBP"
+            }
+          }, {
+            "AccountId" : "31820",
+            "DirectDebitId" : "DD77",
+            "MandateIdentification" : "Golfers",
+            "DirectDebitStatusCode" : "Active",
+            "Name" : "Golf Club",
+            "PreviousPaymentDateTime" : "2017-05-06T09:00:00+00:00",
+            "PreviousPaymentAmount" : {
+              "Amount" : "22.30",
+              "Currency" : "GBP"
+            }
+          } ]
+        },
+        "Links" : {
+          "Self" : "/direct-debits/"
+        },
+        "Meta" : {
+          "TotalPages" : 1
+        }
+      }
+    },
+    "GetBulkBeneficiaries" : {
+      "title" : "Get bulk beneficiaries",
+      "required" : [ "Data", "Links", "Meta" ],
+      "type" : "object",
+      "properties" : {
+        "Data" : {
+          "$ref" : "#/definitions/Data31"
+        },
+        "Links" : {
+          "$ref" : "#/definitions/Links"
+        },
+        "Meta" : {
+          "$ref" : "#/definitions/Meta"
+        }
+      },
+      "example" : {
+        "Data" : {
+          "Beneficiary" : [ {
+            "AccountId" : "22289",
+            "BeneficiaryId" : "Ben1",
+            "Reference" : "Towbar Club",
+            "CreditorAccount" : {
+              "SchemeName" : "SortCodeAccountNumber",
+              "Identification" : "80200112345678",
+              "Name" : "Mrs Juniper"
+            }
+          }, {
+            "AccountId" : "31820",
+            "BeneficiaryId" : "Ben37",
+            "Reference" : "Golf Club",
+            "CreditorAccount" : {
+              "SchemeName" : "SortCodeAccountNumber",
+              "Identification" : "87562298675421",
+              "Name" : "Mr Large"
+            }
+          } ]
+        },
+        "Links" : {
+          "Self" : "/beneficiaries/"
+        },
+        "Meta" : {
+          "TotalPages" : 1
+        }
+      }
+    },
+    "GetBulkTransactions" : {
+      "title" : "Get bulk transactions",
+      "required" : [ "Data", "Links", "Meta" ],
+      "type" : "object",
+      "properties" : {
+        "Data" : {
+          "$ref" : "#/definitions/Data86"
+        },
+        "Links" : {
+          "$ref" : "#/definitions/Links"
+        },
+        "Meta" : {
+          "$ref" : "#/definitions/Meta29"
+        }
+      },
+      "example" : {
+        "Data" : {
+          "Transaction" : [ {
+            "AccountId" : "22289",
+            "TransactionId" : "123",
+            "TransactionReference" : "Ref 123",
+            "Amount" : {
+              "Amount" : "10.00",
+              "Currency" : "GBP"
+            },
+            "CreditDebitIndicator" : "Credit",
+            "Status" : "Booked",
+            "BookingDateTime" : "date",
+            "ValueDateTime" : "2017-04-05T10:45:22+00:00",
+            "TransactionInformation" : "Cash from Aubrey",
+            "BankTransactionCode" : {
+              "Code" : "ReceivedCreditTransfer",
+              "SubCode" : "DomesticCreditTransfer"
+            },
+            "ProprietaryBankTransactionCode" : {
+              "Code" : "Transfer",
+              "Issuer" : "AlphaBank"
+            },
+            "Balance" : {
+              "Amount" : {
+                "Amount" : "230.00",
+                "Currency" : "GBP"
+              },
+              "CreditDebitIndicator" : "Credit",
+              "Type" : "InterimBooked"
+            }
+          }, {
+            "AccountId" : "31820",
+            "TransactionId" : "567",
+            "TransactionReference" : "Ref 124",
+            "Amount" : {
+              "Amount" : "100.00",
+              "Currency" : "GBP"
+            },
+            "CreditDebitIndicator" : "Debit",
+            "Status" : "Booked",
+            "BookingDateTime" : "2017-05-02T14:22:09+00:00",
+            "ValueDateTime" : "2017-05-02T14:22:09+00:00",
+            "TransactionInformation" : "Paid the gas bill",
+            "AddressLine" : "Coventry",
+            "BankTransactionCode" : {
+              "Code" : "IssuedCreditTransfer",
+              "SubCode" : "AutomaticTransfer"
+            },
+            "ProprietaryBankTransactionCode" : {
+              "Code" : "DirectDebit",
+              "Issuer" : "AlphaBank"
+            },
+            "Balance" : {
+              "Amount" : {
+                "Amount" : "57.36",
+                "Currency" : "GBP"
+              },
+              "CreditDebitIndicator" : "Debit",
+              "Type" : "InterimBooked"
+            }
+          } ]
+        },
+        "Links" : {
+          "Self" : "/accounts/22289/transactions/"
+        },
+        "Meta" : {
+          "TotalPages" : 1,
+          "FirstAvailableDateTime" : "2017-05-03T00:00:00+00:00",
+          "LastAvailableDateTime" : "2017-12-03T00:00:00+00:00"
+        }
+      }
+    },
+    "Data86" : {
+      "title" : "Data86",
+      "required" : [ "Transaction" ],
+      "type" : "object",
+      "properties" : {
+        "Transaction" : {
+          "description" : "",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Transaction87"
+          },
+          "example" : [ {
+            "AccountId" : "22289",
+            "TransactionId" : "123",
+            "TransactionReference" : "Ref 123",
+            "Amount" : {
+              "Amount" : "10.00",
+              "Currency" : "GBP"
+            },
+            "CreditDebitIndicator" : "Credit",
+            "Status" : "Booked",
+            "BookingDateTime" : "date",
+            "ValueDateTime" : "2017-04-05T10:45:22+00:00",
+            "TransactionInformation" : "Cash from Aubrey",
+            "BankTransactionCode" : {
+              "Code" : "ReceivedCreditTransfer",
+              "SubCode" : "DomesticCreditTransfer"
+            },
+            "ProprietaryBankTransactionCode" : {
+              "Code" : "Transfer",
+              "Issuer" : "AlphaBank"
+            },
+            "Balance" : {
+              "Amount" : {
+                "Amount" : "230.00",
+                "Currency" : "GBP"
+              },
+              "CreditDebitIndicator" : "Credit",
+              "Type" : "InterimBooked"
+            }
+          }, {
+            "AccountId" : "31820",
+            "TransactionId" : "567",
+            "TransactionReference" : "Ref 124",
+            "Amount" : {
+              "Amount" : "100.00",
+              "Currency" : "GBP"
+            },
+            "CreditDebitIndicator" : "Debit",
+            "Status" : "Booked",
+            "BookingDateTime" : "2017-05-02T14:22:09+00:00",
+            "ValueDateTime" : "2017-05-02T14:22:09+00:00",
+            "TransactionInformation" : "Paid the gas bill",
+            "AddressLine" : "Coventry",
+            "BankTransactionCode" : {
+              "Code" : "IssuedCreditTransfer",
+              "SubCode" : "AutomaticTransfer"
+            },
+            "ProprietaryBankTransactionCode" : {
+              "Code" : "DirectDebit",
+              "Issuer" : "AlphaBank"
+            },
+            "Balance" : {
+              "Amount" : {
+                "Amount" : "57.36",
+                "Currency" : "GBP"
+              },
+              "CreditDebitIndicator" : "Debit",
+              "Type" : "InterimBooked"
+            }
+          } ]
+        }
+      },
+      "example" : {
+        "Transaction" : [ {
+          "AccountId" : "22289",
+          "TransactionId" : "123",
+          "TransactionReference" : "Ref 123",
+          "Amount" : {
+            "Amount" : "10.00",
+            "Currency" : "GBP"
+          },
+          "CreditDebitIndicator" : "Credit",
+          "Status" : "Booked",
+          "BookingDateTime" : "date",
+          "ValueDateTime" : "2017-04-05T10:45:22+00:00",
+          "TransactionInformation" : "Cash from Aubrey",
+          "BankTransactionCode" : {
+            "Code" : "ReceivedCreditTransfer",
+            "SubCode" : "DomesticCreditTransfer"
+          },
+          "ProprietaryBankTransactionCode" : {
+            "Code" : "Transfer",
+            "Issuer" : "AlphaBank"
+          },
+          "Balance" : {
+            "Amount" : {
+              "Amount" : "230.00",
+              "Currency" : "GBP"
+            },
+            "CreditDebitIndicator" : "Credit",
+            "Type" : "InterimBooked"
+          }
+        }, {
+          "AccountId" : "31820",
+          "TransactionId" : "567",
+          "TransactionReference" : "Ref 124",
+          "Amount" : {
+            "Amount" : "100.00",
+            "Currency" : "GBP"
+          },
+          "CreditDebitIndicator" : "Debit",
+          "Status" : "Booked",
+          "BookingDateTime" : "2017-05-02T14:22:09+00:00",
+          "ValueDateTime" : "2017-05-02T14:22:09+00:00",
+          "TransactionInformation" : "Paid the gas bill",
+          "AddressLine" : "Coventry",
+          "BankTransactionCode" : {
+            "Code" : "IssuedCreditTransfer",
+            "SubCode" : "AutomaticTransfer"
+          },
+          "ProprietaryBankTransactionCode" : {
+            "Code" : "DirectDebit",
+            "Issuer" : "AlphaBank"
+          },
+          "Balance" : {
+            "Amount" : {
+              "Amount" : "57.36",
+              "Currency" : "GBP"
+            },
+            "CreditDebitIndicator" : "Debit",
+            "Type" : "InterimBooked"
+          }
+        } ]
+      }
+    },
+    "Transaction87" : {
+      "title" : "Transaction87",
+      "required" : [ "AccountId", "TransactionId", "TransactionReference", "Amount", "CreditDebitIndicator", "Status", "BookingDateTime", "ValueDateTime", "TransactionInformation", "BankTransactionCode", "ProprietaryBankTransactionCode", "Balance" ],
+      "type" : "object",
+      "properties" : {
+        "AccountId" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "22289"
+        },
+        "TransactionId" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "123"
+        },
+        "TransactionReference" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Ref 123"
+        },
+        "Amount" : {
+          "$ref" : "#/definitions/Amount"
+        },
+        "CreditDebitIndicator" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Credit"
+        },
+        "Status" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Booked"
+        },
+        "BookingDateTime" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "date"
+        },
+        "ValueDateTime" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "4/5/2017 10:45:22 AM"
+        },
+        "TransactionInformation" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Cash from Aubrey"
+        },
+        "BankTransactionCode" : {
+          "$ref" : "#/definitions/BankTransactionCode"
+        },
+        "ProprietaryBankTransactionCode" : {
+          "$ref" : "#/definitions/ProprietaryBankTransactionCode"
+        },
+        "Balance" : {
+          "$ref" : "#/definitions/Balance"
+        },
+        "AddressLine" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Coventry"
+        }
+      },
+      "example" : {
+        "AccountId" : "22289",
+        "TransactionId" : "123",
+        "TransactionReference" : "Ref 123",
+        "Amount" : {
+          "Amount" : "10.00",
+          "Currency" : "GBP"
+        },
+        "CreditDebitIndicator" : "Credit",
+        "Status" : "Booked",
+        "BookingDateTime" : "date",
+        "ValueDateTime" : "2017-04-05T10:45:22+00:00",
+        "TransactionInformation" : "Cash from Aubrey",
+        "BankTransactionCode" : {
+          "Code" : "ReceivedCreditTransfer",
+          "SubCode" : "DomesticCreditTransfer"
+        },
+        "ProprietaryBankTransactionCode" : {
+          "Code" : "Transfer",
+          "Issuer" : "AlphaBank"
+        },
+        "Balance" : {
+          "Amount" : {
+            "Amount" : "230.00",
+            "Currency" : "GBP"
+          },
+          "CreditDebitIndicator" : "Credit",
+          "Type" : "InterimBooked"
+        }
+      }
+    },
+    "GetBulkBalances" : {
+      "title" : "Get bulk balances",
+      "required" : [ "Data", "Links", "Meta" ],
+      "type" : "object",
+      "properties" : {
+        "Data" : {
+          "$ref" : "#/definitions/Data96"
+        },
+        "Links" : {
+          "$ref" : "#/definitions/Links"
+        },
+        "Meta" : {
+          "$ref" : "#/definitions/Meta"
+        }
+      },
+      "example" : {
+        "Data" : {
+          "Balance" : [ {
+            "AccountId" : "22289",
+            "Amount" : {
+              "Amount" : "1230.00",
+              "Currency" : "GBP"
+            },
+            "CreditDebitIndicator" : "Credit",
+            "Type" : "InterimAvailable",
+            "DateTime" : "2017-04-05T10:43:07+00:00",
+            "CreditLine" : [ {
+              "Included" : true,
+              "Amount" : {
+                "Amount" : "1000.00",
+                "Currency" : "GBP"
+              },
+              "Type" : "Pre-Agreed"
+            } ]
+          }, {
+            "AccountId" : "31820",
+            "Amount" : {
+              "Amount" : "57.36",
+              "Currency" : "GBP"
+            },
+            "CreditDebitIndicator" : "Debit",
+            "Type" : "InterimBooked",
+            "DateTime" : "2017-05-02T14:22:09+00:00"
+          } ]
+        },
+        "Links" : {
+          "Self" : "/balances/"
+        },
+        "Meta" : {
+          "TotalPages" : 1
+        }
+      }
+    },
+    "Data96" : {
+      "title" : "Data96",
+      "required" : [ "Balance" ],
+      "type" : "object",
+      "properties" : {
+        "Balance" : {
+          "description" : "",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Balance97"
+          },
+          "example" : [ {
+            "AccountId" : "22289",
+            "Amount" : {
+              "Amount" : "1230.00",
+              "Currency" : "GBP"
+            },
+            "CreditDebitIndicator" : "Credit",
+            "Type" : "InterimAvailable",
+            "DateTime" : "2017-04-05T10:43:07+00:00",
+            "CreditLine" : [ {
+              "Included" : true,
+              "Amount" : {
+                "Amount" : "1000.00",
+                "Currency" : "GBP"
+              },
+              "Type" : "Pre-Agreed"
+            } ]
+          }, {
+            "AccountId" : "31820",
+            "Amount" : {
+              "Amount" : "57.36",
+              "Currency" : "GBP"
+            },
+            "CreditDebitIndicator" : "Debit",
+            "Type" : "InterimBooked",
+            "DateTime" : "2017-05-02T14:22:09+00:00"
+          } ]
+        }
+      },
+      "example" : {
+        "Balance" : [ {
+          "AccountId" : "22289",
+          "Amount" : {
+            "Amount" : "1230.00",
+            "Currency" : "GBP"
+          },
+          "CreditDebitIndicator" : "Credit",
+          "Type" : "InterimAvailable",
+          "DateTime" : "2017-04-05T10:43:07+00:00",
+          "CreditLine" : [ {
+            "Included" : true,
+            "Amount" : {
+              "Amount" : "1000.00",
+              "Currency" : "GBP"
+            },
+            "Type" : "Pre-Agreed"
+          } ]
+        }, {
+          "AccountId" : "31820",
+          "Amount" : {
+            "Amount" : "57.36",
+            "Currency" : "GBP"
+          },
+          "CreditDebitIndicator" : "Debit",
+          "Type" : "InterimBooked",
+          "DateTime" : "2017-05-02T14:22:09+00:00"
+        } ]
+      }
+    },
+    "Balance97" : {
+      "title" : "Balance97",
+      "required" : [ "AccountId", "Amount", "CreditDebitIndicator", "Type", "DateTime" ],
+      "type" : "object",
+      "properties" : {
+        "AccountId" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "22289"
+        },
+        "Amount" : {
+          "$ref" : "#/definitions/Amount"
+        },
+        "CreditDebitIndicator" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "Credit"
+        },
+        "Type" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "InterimAvailable"
+        },
+        "DateTime" : {
+          "description" : "",
+          "type" : "string",
+          "example" : "4/5/2017 10:43:07 AM"
+        },
+        "CreditLine" : {
+          "description" : "",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CreditLine"
+          },
+          "example" : [ {
+            "Included" : true,
+            "Amount" : {
+              "Amount" : "1000.00",
+              "Currency" : "GBP"
+            },
+            "Type" : "Pre-Agreed"
+          } ]
+        }
+      },
+      "example" : {
+        "AccountId" : "22289",
+        "Amount" : {
+          "Amount" : "1230.00",
+          "Currency" : "GBP"
+        },
+        "CreditDebitIndicator" : "Credit",
+        "Type" : "InterimAvailable",
+        "DateTime" : "2017-04-05T10:43:07+00:00",
+        "CreditLine" : [ {
+          "Included" : true,
+          "Amount" : {
+            "Amount" : "1000.00",
+            "Currency" : "GBP"
+          },
+          "Type" : "Pre-Agreed"
+        } ]
+      }
+    },
+    "GetBulkProducts" : {
+      "title" : "Get bulk products",
+      "required" : [ "Data", "Links", "Meta" ],
+      "type" : "object",
+      "properties" : {
+        "Data" : {
+          "$ref" : "#/definitions/Data60"
+        },
+        "Links" : {
+          "$ref" : "#/definitions/Links"
+        },
+        "Meta" : {
+          "$ref" : "#/definitions/Meta"
+        }
+      },
+      "example" : {
+        "Data" : {
+          "Product" : [ {
+            "AccountId" : "22289",
+            "ProductIdentifier" : "51B",
+            "ProductType" : "PCA",
+            "ProductName" : "321 Product"
+          }, {
+            "AccountId" : "31820",
+            "ProductIdentifier" : "001",
+            "ProductType" : "BCA",
+            "ProductName" : "123 Product"
+          } ]
+        },
+        "Links" : {
+          "Self" : "/products/"
+        },
+        "Meta" : {
+          "TotalPages" : 1
+        }
+      }
+    }
+  }
+}
