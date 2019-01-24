@@ -13,7 +13,7 @@
       "name" : "3Scale-Red Hat",
       "url" : "http://github.com/3scale/sms/LICENSE-MIT"
     },
-    "version" : "1.4"
+    "version" : "1.5"
   },
   "host" : "payments-staging.5.9.12.13.xip.io",
   "basePath" : "/",
