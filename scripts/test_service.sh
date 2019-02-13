@@ -49,6 +49,7 @@ echo $sanbox_endpoint''$api_test_path'?user_key='$user_key
 
 # Check service status  
 curl -k $ENDPOINT'?user_key='$user_key
+curl -k $ENDPOINT -H'user_key:'$user_key
 
 # Remove application
 rm=$(3scale-cli applications delete -a $account_id -i $app_id)
