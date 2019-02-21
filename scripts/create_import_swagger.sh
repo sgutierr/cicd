@@ -41,11 +41,11 @@ if [ -z "$PROTOCOL" ];
   echo $"OIDC authentication method"
   # Setup OIDC in service
   OIDC_SERVICE="https://3scale-admin.5.9.49.249.xip.io/admin/api/services/"$SERVICE_ID".xml"
-  echo $RENAME_SERVICE
+  echo $OIDC_SERVICE
   curl -v -k -X PUT $OIDC_SERVICE -d 'access_token='$TOKEN'&backend_version=oidc'
   # Setup OIDC endpoint issuer in service
   ISSUER_ENDPOINT=$(more $SWG | grep authorizationUrl | cut -d '"' -f4 | head -1)
-  curl -v -k -X PUT $RENAME_SERVICE -d 'access_token='$TOKEN'&oidc_issuer_endpoint='$ISSUER_ENDPOINT
+  curl -v -k -X PUT $OIDC_SERVICE -d 'access_token='$TOKEN'&oidc_issuer_endpoint='$ISSUER_ENDPOINT
 
 fi 
 
