@@ -1,7 +1,7 @@
 {
   "swagger" : "2.0",
   "info" : {
-    "title" : "Payment DEMO API",
+    "title" : "PaymentOIDC",
     "description" : "Payment DEMO API - OIDC",
     "termsOfService" : "http://swagger.io/terms/",
     "contact" : {
