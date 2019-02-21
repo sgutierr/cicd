@@ -1,13 +1,11 @@
 #!/bin/sh
 
 SWG=$1
-TOKEN=$2
 # get version field 
 VERS=$(more $SWG | grep version | cut -d '"' -f4 | head -1)
 # get title field
 BASE_NAME=$(more $SWG | grep title | cut -d '"' -f4 | head -1)
 MAJOR=$(echo $VERS | cut -d "." -f1)
-echo $BASE_NAME $MAJOR
 PATCH=$(echo $((RANDOM%10000)))
 #Compose service name
 SERVICE_NAME=$BASE_NAME-v$VERS.$PATCH
@@ -24,11 +22,13 @@ if [ -z "$SERVICE_ID" ];
 
   echo New service:$SERVICE_ID
   else
-  # Rename service
-  RENAME_SERVICE="https://3scale-admin.5.9.49.249.xip.io/admin/api/services/"$SERVICE_ID".xml"
-  echo $RENAME_SERVICE
-  curl -v -k -X PUT $RENAME_SERVICE -d 'access_token='$TOKEN'&name='$SERVICE_NAME
-
+  # Drop service
+  3scale-cli services delete -s $SERVICE_ID -c $SERVICE_NAME 
+  echo Delete service
+  # Create a new service for this minor release.
+  3scale-cli services create --serviceName $SERVICE_NAME
+  SERVICE_ID=$(3scale-cli services list | grep $BASE_NAME-v$MAJOR | awk '{ print $1 }')
+  echo Recreate service:$SERVICE_ID  
 fi
 SYSTEM_ID=$(3scale-cli services list | grep $BASE_NAME-v$MAJOR | awk '{ print $4 }')
 # Import Swagger defintion
