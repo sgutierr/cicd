@@ -4,6 +4,8 @@ SWG=$1
 TOKEN=$2
 # get version field 
 VERS=$(more $SWG | grep version | cut -d '"' -f4 | head -1)
+# get OIDC protocol
+PROTOCOL=$(more $SWG | grep '"type" : "oauth2"')
 # get title field
 BASE_NAME=$(more $SWG | grep title | cut -d '"' -f4 | head -1)
 MAJOR=$(echo $VERS | cut -d "." -f1)
@@ -30,6 +32,23 @@ if [ -z "$SERVICE_ID" ];
   curl -v -k -X PUT $RENAME_SERVICE -d 'access_token='$TOKEN'&name='$SERVICE_NAME
 
 fi
+
+if [ -z "$PROTOCOL" ];
+  then
+  # By default API_KEY
+   echo "API key authentication method"
+  else
+  echo $"OIDC authentication method"
+  # Setup OIDC in service
+  OIDC_SERVICE="https://3scale-admin.5.9.49.249.xip.io/admin/api/services/"$SERVICE_ID".xml"
+  echo $RENAME_SERVICE
+  curl -v -k -X PUT $OIDC_SERVICE -d 'access_token='$TOKEN'&backend_version=oidc'
+  # Setup OIDC endpoint issuer in service
+  ISSUER_ENDPOINT=$(more $SWG | grep authorizationUrl | cut -d '"' -f4 | head -1)
+  curl -v -k -X PUT $RENAME_SERVICE -d 'access_token='$TOKEN'&oidc_issuer_endpoint='$ISSUER_ENDPOINT
+
+fi 
+
 SYSTEM_ID=$(3scale-cli services list | grep $BASE_NAME-v$MAJOR | awk '{ print $4 }')
 # Import Swagger defintion
 3scale-cli import swagger -f $SWG -p "{method}{path}" -m true --service $SERVICE_ID
