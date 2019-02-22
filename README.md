@@ -1,4 +1,4 @@
-# cicd
+# This repository is a 3scale CI/CD wrapper example
 
 ## Install ruby, npm, 3scale-cli, 3scale toolbox and cms tool.
 cd docker
